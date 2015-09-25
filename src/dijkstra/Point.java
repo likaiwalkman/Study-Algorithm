@@ -2,37 +2,37 @@ package dijkstra;
 
 public class Point {
 
-	public Point(String id) {
-		this.id = id;
-	}
-	
-	public String getId() {
-		return id;
-	}
+  public Point(String id) {
+    this.id = id;
+  }
 
-	public void setId( String id ) {
-		this.id = id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	@Override
-	public String toString() {
-		return id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	@Override
-	public int hashCode() {
-		return id.hashCode();
-	}
+  @Override
+  public String toString() {
+    return id;
+  }
 
-	@Override
-	public boolean equals( Object obj ) {
-		if (!(obj instanceof Point)) {
-			return false;
-		} else {
-			return ((Point) obj).id.equals( id );
-		}
-	}
+  @Override
+  public int hashCode() {
+    return id.hashCode();
+  }
 
-	private String	id;
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof Point)) {
+      return false;
+    } else {
+      return ((Point) obj).id.equals(id);
+    }
+  }
+
+  private String id;
 
 }

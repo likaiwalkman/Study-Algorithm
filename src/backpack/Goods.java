@@ -2,28 +2,28 @@ package backpack;
 
 public class Goods {
 
-	public Goods(int weight, int value) {
-		this.weight = weight;
-		this.value = value;
-	}
+  public Goods(int weight, int value) {
+    this.weight = weight;
+    this.value = value;
+  }
 
-	public int getWeight() {
-		return weight;
-	}
+  public int getWeight() {
+    return weight;
+  }
 
-	public void setWeight( int weight ) {
-		this.weight = weight;
-	}
+  public void setWeight(int weight) {
+    this.weight = weight;
+  }
 
-	public int getValue() {
-		return value;
-	}
+  public int getValue() {
+    return value;
+  }
 
-	public void setValue( int value ) {
-		this.value = value;
-	}
+  public void setValue(int value) {
+    this.value = value;
+  }
 
-	private int	value;
-	private int	weight;
+  private int value;
+  private int weight;
 
 }
