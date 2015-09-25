@@ -79,7 +79,7 @@ public class Dijkstra {
     List<Point> selectedPoints = new ArrayList<>();
     selectedPoints.add(zeroPoint);
 
-    points = points.subList( 1, points.size() );
+    points = points.subList(1, points.size());
 
     // initialization
     for (Border border : borders) {
