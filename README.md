@@ -1,3 +1,2 @@
 # Study-Algorithm
-Algorithms
-
+dijkstra: Dijkstra Algorithm
