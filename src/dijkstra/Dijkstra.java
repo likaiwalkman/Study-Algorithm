@@ -18,32 +18,50 @@ public class Dijkstra {
     List<Border> borders = new ArrayList<>();
     Map<Border, Integer> weights = new HashMap<>();
 
-    borders.add(new Border(points.get(0), points.get(1)));// 6
+    borders.add(new Border(points.get(0), points.get(1)));
+    borders.add(new Border(points.get(1), points.get(0)));
     weights.put(borders.get(0), 6);
+    weights.put(borders.get(1), 6);
 
-    borders.add(new Border(points.get(0), points.get(2)));// 3
-    weights.put(borders.get(1), 3);
+    borders.add(new Border(points.get(0), points.get(2)));
+    borders.add(new Border(points.get(2), points.get(0)));
+    weights.put(borders.get(2), 3);
+    weights.put(borders.get(3), 3);
 
-    borders.add(new Border(points.get(2), points.get(1)));// 2
-    weights.put(borders.get(2), 2);
+    borders.add(new Border(points.get(2), points.get(1)));
+    borders.add(new Border(points.get(1), points.get(2)));
+    weights.put(borders.get(4), 2);
+    weights.put(borders.get(5), 2);
 
-    borders.add(new Border(points.get(2), points.get(4)));// 4
-    weights.put(borders.get(3), 4);
+    borders.add(new Border(points.get(2), points.get(4)));
+    borders.add(new Border(points.get(4), points.get(2)));
+    weights.put(borders.get(6), 4);
+    weights.put(borders.get(7), 4);
 
-    borders.add(new Border(points.get(2), points.get(3)));// 3
-    weights.put(borders.get(4), 3);
+    borders.add(new Border(points.get(2), points.get(3)));
+    borders.add(new Border(points.get(3), points.get(2)));
+    weights.put(borders.get(8), 3);
+    weights.put(borders.get(9), 3);
 
-    borders.add(new Border(points.get(1), points.get(3)));// 5
-    weights.put(borders.get(5), 5);
+    borders.add(new Border(points.get(1), points.get(3)));
+    borders.add(new Border(points.get(3), points.get(1)));
+    weights.put(borders.get(10), 5);
+    weights.put(borders.get(11), 5);
 
-    borders.add(new Border(points.get(3), points.get(4)));// 2
-    weights.put(borders.get(6), 2);
+    borders.add(new Border(points.get(3), points.get(4)));
+    borders.add(new Border(points.get(4), points.get(3)));
+    weights.put(borders.get(12), 2);
+    weights.put(borders.get(13), 2);
 
-    borders.add(new Border(points.get(3), points.get(5)));// 3
-    weights.put(borders.get(7), 3);
+    borders.add(new Border(points.get(3), points.get(5)));
+    borders.add(new Border(points.get(5), points.get(3)));
+    weights.put(borders.get(14), 3);
+    weights.put(borders.get(15), 3);
 
-    borders.add(new Border(points.get(4), points.get(5)));// 5
-    weights.put(borders.get(8), 5);
+    borders.add(new Border(points.get(4), points.get(5)));
+    borders.add(new Border(points.get(5), points.get(4)));
+    weights.put(borders.get(16), 5);
+    weights.put(borders.get(17), 5);
 
 
     mid(points, borders, weights);
@@ -61,24 +79,17 @@ public class Dijkstra {
     List<Point> selectedPoints = new ArrayList<>();
     selectedPoints.add(zeroPoint);
 
-    // points = points.subList( 1, points.size() );
-
-    List<Point> followersList = new ArrayList<>();
-    for (int i = 1; i < points.size(); i++) {
-      followersList.add(points.get(i));
-    }
-    points = followersList;
+    points = points.subList( 1, points.size() );
 
     // initialization
     for (Border border : borders) {
       Point a = border.getA();
       Point b = border.getB();
       assemblePointLinkers(a, b, pointLinkers);
-      assemblePointLinkers(b, a, pointLinkers);
     }
     Point head = null;
 
-    for (int size = points.size(); size > 0; points.remove(0)) {
+    for (; points.size() > 0; points.remove(0)) {
       head = points.get(0);
       List<Point> linkersOfHead = pointLinkers.get(head);
       List<Point> selectedLinkersOfHead = new ArrayList<>();
@@ -95,11 +106,13 @@ public class Dijkstra {
             minRoutes.get(new Border(zeroPoint, point)) + weights.get(new Border(point, head));
         if (unassigned) {
           value = min;
+          unassigned = false;
         } else {
           value = value > min ? min : value;
         }
       }
       minRoutes.put(newMinBorderForHead, value);
+      selectedPoints.add(head);
     }
 
   }
