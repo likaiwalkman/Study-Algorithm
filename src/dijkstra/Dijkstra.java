@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Dijkstar
+ * @author victor
+ *
+ */
 public class Dijkstra {
 
   public static void main(String[] args) {

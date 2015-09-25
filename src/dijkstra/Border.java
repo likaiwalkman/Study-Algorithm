@@ -1,5 +1,9 @@
 package dijkstra;
-
+/**
+ * 边界
+ * @author victor
+ *
+ */
 public class Border {
 
   public Border(Point a, Point b) {

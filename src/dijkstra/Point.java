@@ -1,5 +1,9 @@
 package dijkstra;
-
+/**
+ * 顶点
+ * @author victor
+ *
+ */
 public class Point {
 
   public Point(String id) {
