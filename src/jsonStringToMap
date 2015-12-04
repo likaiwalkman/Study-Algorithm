@@ -1,0 +1,29 @@
+package com.consult.app.request;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+
+public class GeneralRequest {
+
+    public static Map<String,Object> jsonStrToMap(String jsonStr)  {
+        Map<String,Object> map = new HashMap<String,Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            map = mapper.readValue(jsonStr, new TypeReference<HashMap>(){});
+        } catch (JsonParseException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (JsonMappingException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return map;
+    }
+
+}
