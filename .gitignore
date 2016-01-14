@@ -2,3 +2,6 @@
 /.classpath
 /.settings
 /target
+/out
+Study-Algorithm.iml
+/.idea
