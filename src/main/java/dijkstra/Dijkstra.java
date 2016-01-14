@@ -13,14 +13,14 @@ import java.util.Map;
 public class Dijkstra {
 
   public static void main(String[] args) {
-    List<Point> points = new ArrayList<>();
+    List<Point> points = new ArrayList<Point>();
     for (int i = 0; i < 6; i++) {
       char[] chars = {(char) ('A' + i)};
       points.add(new Point(new String(chars)));
     }
 
-    List<Border> borders = new ArrayList<>();
-    Map<Border, Integer> weights = new HashMap<>();
+    List<Border> borders = new ArrayList<Border>();
+    Map<Border, Integer> weights = new HashMap<Border, Integer>();
 
     borders.add(new Border(points.get(0), points.get(1)));
     borders.add(new Border(points.get(1), points.get(0)));
@@ -80,7 +80,7 @@ public class Dijkstra {
 
     minRoutes.put(new Border(zeroPoint, zeroPoint), 0);
 
-    List<Point> selectedPoints = new ArrayList<>();
+    List<Point> selectedPoints = new ArrayList<Point>();
     selectedPoints.add(zeroPoint);
 
     points = points.subList(1, points.size());
@@ -96,7 +96,7 @@ public class Dijkstra {
     for (; points.size() > 0; points.remove(0)) {
       head = points.get(0);
       List<Point> linkersOfHead = pointLinkers.get(head);
-      List<Point> selectedLinkersOfHead = new ArrayList<>();
+      List<Point> selectedLinkersOfHead = new ArrayList<Point>();
       for (Point point : linkersOfHead) {
         if (selectedPoints.contains(point)) {
           selectedLinkersOfHead.add(point);
@@ -123,7 +123,7 @@ public class Dijkstra {
 
   private static void assemblePointLinkers(Point a, Point b, Map<Point, List<Point>> pointLinkers) {
     if (!pointLinkers.containsKey(a)) {
-      List<Point> lists = new ArrayList<>();
+      List<Point> lists = new ArrayList<Point>();
       lists.add(b);
       pointLinkers.put(a, lists);
     } else {
@@ -132,8 +132,8 @@ public class Dijkstra {
     }
   }
 
-  private static Map<Point, List<Point>> pointLinkers = new HashMap<>();
+  private static Map<Point, List<Point>> pointLinkers = new HashMap<Point, List<Point>>();
 
-  private static Map<Border, Integer> minRoutes = new HashMap<>();
+  private static Map<Border, Integer> minRoutes = new HashMap<Border, Integer>();
 
 }
