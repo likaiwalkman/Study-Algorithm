@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Created by kai_li on 2016/1/22.
+ * help test : http://www.brainmetrix.com/8-queens/
  */
 public class BackTrace {
 
