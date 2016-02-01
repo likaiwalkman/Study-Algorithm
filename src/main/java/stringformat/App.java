@@ -22,7 +22,7 @@ public class App {
         System.out.println(input.toString());
 
     }
-    static Map<String, Object> map = new HashMap<>();
+    static Map<String, Object> map = new HashMap<String, Object>();
     static {
         char c = 'a';
         for (int i = 0; i < 5; i++) {

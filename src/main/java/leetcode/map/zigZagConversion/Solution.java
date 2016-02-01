@@ -23,7 +23,7 @@ convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 public class Solution {
     public String convert(String s, int numRows) {
         if (numRows == 1) return s;
-        Map<Integer, List<Character>> map = new HashMap<>();
+        Map<Integer, List<Character>> map = new HashMap<Integer, List<Character>>();
         int length = s.length();
         boolean flag = true;
         while( length > 0 ){

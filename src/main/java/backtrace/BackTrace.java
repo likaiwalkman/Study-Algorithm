@@ -14,7 +14,7 @@ public class BackTrace {
     public static Node initNodes(int n) {
         Node root = new Node();
         root.val = -1;
-        root.children = new LinkedList<>();
+        root.children = new LinkedList<Node>();
         Node[] nodes = new Node[n * n];
         for (int i = 0; i < n * n; i++) {
             nodes[i] = new Node();
@@ -22,7 +22,7 @@ public class BackTrace {
         }
         for (int i = 0; i < (n * n); i++) {
             if (nodes[i].children == null) {
-                nodes[i].children = new LinkedList<>();
+                nodes[i].children = new LinkedList<Node>();
             }
         }
         for (int i = 0; i < n - 1; i++) {
@@ -105,7 +105,7 @@ public class BackTrace {
         List<Node> children = root.children;
 
         for (Node node : children) {
-            Set<Node> path = new HashSet<>();
+            Set<Node> path = new HashSet<Node>();
             backtrace(node,path, n);
         }
     }
