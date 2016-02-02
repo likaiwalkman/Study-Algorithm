@@ -16,8 +16,10 @@ package leetcode.loop.validAnagram;
   */
 
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by kai_li on 2016/2/2.
@@ -46,6 +48,29 @@ public class Solution {
                 m2.put(c, cCount);
             }
             return m1.equals(m2);
+        }
+    }
+
+    public static void main(String[] args) {
+        Map<Integer, Integer> map = new TreeMap<Integer, Integer>(new Comparator() {
+            public int compare(Object o1, Object o2) {
+                Integer i1 = (Integer)o1;
+                Integer i2 = (Integer)o2;
+                return i2 - i1;
+            }
+        });
+        map.put(1,1);
+        map.put(2,1);
+        map.put(3,1);
+        map.put(4,1);
+        map.put(5,1);
+        map.put(6,1);
+        map.put(7,1);
+        map.put(8,1);
+        map.put(9,1);
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer i = entry.getKey();
+            System.out.println(i);
         }
     }
 }
