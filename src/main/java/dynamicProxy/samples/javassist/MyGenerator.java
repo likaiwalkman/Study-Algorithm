@@ -1,4 +1,4 @@
-package classloader.dynamicproxy.samples.javassist;
+package dynamicProxy.samples.javassist;
 
 import javassist.ClassPool;
 import javassist.CtClass;

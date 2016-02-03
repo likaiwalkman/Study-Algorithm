@@ -1,10 +1,9 @@
-package classloader.dynamicproxy.samples.asm;
+package dynamicProxy.samples.asm;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import classloader.dynamicproxy.samples.MyTest;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;

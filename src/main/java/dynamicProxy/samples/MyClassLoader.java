@@ -1,4 +1,4 @@
-package classloader.dynamicproxy.samples;
+package dynamicProxy.samples;
 
 public class MyClassLoader extends ClassLoader {
 
