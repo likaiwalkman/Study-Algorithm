@@ -12,9 +12,9 @@ public class MyTest {
         //读取本地的class文件内的字节码，转换成字节码数组
         File        file   = new File(".");
         InputStream input  = //new FileInputStream(file.getCanonicalPath() + "\\bin\\samples\\Programmer.class");
-        MyTest.class.getClassLoader().getResource("classloader/dynamicproxy/samples/Programmer.class").openStream();
+        //MyTest.class.getClassLoader().getResource("classloader/dynamicproxy/samples/Programmer.class").openStream();
+        new  FileInputStream(MyTest.class.getResource("").getPath()+"Programmer.class");
         byte[]      result = new byte[1024];
-
         int count = input.read(result);
         // 使用自定义的类加载器将 byte字节码数组转换为对应的class对象
         MyClassLoader loader = new MyClassLoader();
