@@ -16,7 +16,7 @@ public class DynamicProxyTest {
     private static void createProxy() throws Exception {
         ClassPool pool = ClassPool.getDefault();
 
-        CtClass cc = pool.makeClass("dynamicProxy.staticProxy.StationProxy$");
+        CtClass cc = pool.makeClass("StationProxy$");
 
         //设置接口
         CtClass interface1 = pool.get("dynamicProxy.staticProxy.TicketService");

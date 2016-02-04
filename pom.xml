@@ -31,5 +31,11 @@
             <artifactId>javassist</artifactId>
             <version>3.18.1-GA</version>
         </dependency>
+        <!-- cglib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2.2</version>
+        </dependency>
     </dependencies>
 </project>
