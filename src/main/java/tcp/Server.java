@@ -19,7 +19,6 @@ public class Server {
         try {
             final Socket socket = server.accept();
             new Thread(new Runnable() {
-                @Override
                 public void run() {
                     try {
                         InputStream ins = socket.getInputStream();
