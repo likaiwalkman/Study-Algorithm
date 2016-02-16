@@ -14,10 +14,17 @@ public class Client {
             client.connect(new InetSocketAddress("localhost", 8080));
             OutputStream ous = client.getOutputStream();
             ous.write(97);
-            Thread.sleep(20*1000);
+            if (1==0) Thread.sleep(20*1000);
             for (int i = 0; i < 10; i++) {
                 ous.write(i);
             }
+            ous.close();
+            OutputStream fous = new FileOutputStream(new File("haha"));
+            int pos= -1;
+            while((pos=client.getInputStream().read())!=-1){
+                fous.write(pos);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

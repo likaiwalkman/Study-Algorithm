@@ -25,11 +25,25 @@ public class Server {
                         int i = -1;
                         while ((i=ins.read())!=-1){
                             System.out.println(i);
-                            if (97 == i) {
-                                Thread.sleep(20*1000);
+                            if (197 == i) {//
+                                Thread.sleep(40*1000);
                             }
 
                         }
+                        System.out.println("haha");
+                        String fileName = "/Users/victor/git/Study-Algorithm/src/main/java/tcp/Client.java";
+                        System.out.println("hehe");
+                        File file = new File(fileName);
+                        System.out.println(file.getName());
+                        InputStream fins = new FileInputStream(file);
+                        int pos = -1;
+                        while((pos=fins.read())!=-1){
+                            System.out.println(pos);
+                            socket.getOutputStream().write(pos);
+                        }
+                        socket.getOutputStream().close();
+                        //socket.getInputStream().close();
+
 
                     } catch (IOException e) {
                         e.printStackTrace();
