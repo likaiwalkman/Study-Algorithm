@@ -1,0 +1,323 @@
+2016-01-18 14:03:24,253 [localhost-startStop-1] INFO  DalClientFactoryListener - Dal Factory Listener is about to start
+2016-01-18 14:03:24,299 [localhost-startStop-1] ERROR DalClientFactoryListener - Error when init client factory
+java.lang.RuntimeException: Read /D:/WebSites/CtripAppData/Database.Config file error, msg: D:\WebSites\CtripAppData\Database.Config (系统找不到指定的路径。)
+	at com.ctrip.platform.dal.dao.configure.DatabaseConfigParser.parseDBAllInOneConfig(DatabaseConfigParser.java:133) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DatabaseConfigParser.initDBAllInOneConfig(DatabaseConfigParser.java:94) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DatabaseConfigParser.<init>(DatabaseConfigParser.java:62) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DatabaseConfigParser.newInstance(DatabaseConfigParser.java:69) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.datasource.LocalDataSourceProvider.<init>(LocalDataSourceProvider.java:28) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.datasource.DataSourceLocator.<init>(DataSourceLocator.java:18) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.datasource.DataSourceLocator.newInstance(DataSourceLocator.java:25) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.datasource.DefaultDalConnectionLocator.initialize(DefaultDalConnectionLocator.java:27) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DalConfigureFactory.readComponent(DalConfigureFactory.java:201) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DalConfigureFactory.getFromDocument(DalConfigureFactory.java:138) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DalConfigureFactory.load(DalConfigureFactory.java:116) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DalConfigureFactory.load(DalConfigureFactory.java:101) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.configure.DalConfigureFactory.load(DalConfigureFactory.java:97) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.DalClientFactory.internalInitClientFactory(DalClientFactory.java:66) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.DalClientFactory.initClientFactory(DalClientFactory.java:37) ~[dal-java-client-1.4.0.jar:na]
+	at com.ctrip.platform.dal.dao.helper.DalClientFactoryListener.contextInitialized(DalClientFactoryListener.java:27) ~[dal-java-client-1.4.0.jar:na]
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_66]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_66]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_66]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_66]
+Caused by: java.io.FileNotFoundException: D:\WebSites\CtripAppData\Database.Config (系统找不到指定的路径。)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_66]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[na:1.8.0_66]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[na:1.8.0_66]
+	at com.ctrip.platform.dal.dao.configure.DatabaseConfigParser.parseDBAllInOneConfig(DatabaseConfigParser.java:105) ~[dal-java-client-1.4.0.jar:na]
+	... 24 common frames omitted
+2016-01-18 17:17:31,622 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 17:17:31,662 [main] INFO  SimpleThreadPool - Job execution threads will use class loader of thread: main
+2016-01-18 17:17:31,671 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 17:17:31,672 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.1 created.
+2016-01-18 17:17:31,673 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 17:17:31,674 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 17:17:31,743 [main] INFO  StdSchedulerFactory - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-01-18 17:17:31,743 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.1
+2016-01-18 17:17:31,744 [main] INFO  QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2016-01-18 17:17:58,595 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 17:17:58,600 [main] INFO  SimpleThreadPool - Job execution threads will use class loader of thread: main
+2016-01-18 17:17:58,614 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 17:17:58,617 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.1 created.
+2016-01-18 17:17:58,619 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 17:17:58,620 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 17:17:58,620 [main] INFO  StdSchedulerFactory - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-01-18 17:17:58,620 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.1
+2016-01-18 17:17:58,621 [main] INFO  QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2016-01-18 17:18:01,292 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 17:18:49,238 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 17:18:49,242 [main] INFO  SimpleThreadPool - Job execution threads will use class loader of thread: main
+2016-01-18 17:18:49,254 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 17:18:49,255 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.1 created.
+2016-01-18 17:18:49,256 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 17:18:49,256 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 17:18:49,257 [main] INFO  StdSchedulerFactory - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-01-18 17:18:49,257 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.1
+2016-01-18 17:18:49,258 [main] INFO  QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2016-01-18 17:18:50,704 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 17:21:23,664 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 17:21:23,668 [main] INFO  SimpleThreadPool - Job execution threads will use class loader of thread: main
+2016-01-18 17:21:23,678 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 17:21:23,679 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.1 created.
+2016-01-18 17:21:23,680 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 17:21:23,680 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 17:21:23,681 [main] INFO  StdSchedulerFactory - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-01-18 17:21:23,681 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.1
+2016-01-18 17:21:23,681 [main] INFO  QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2016-01-18 17:21:25,356 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 18:01:30,899 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:01:30 CST 2016]; root of context hierarchy
+2016-01-18 18:01:31,096 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:01:31,730 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3578436e: defining beans [job1]; root of factory hierarchy
+2016-01-18 18:01:31,731 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3578436e: defining beans [job1]; root of factory hierarchy
+2016-01-18 18:02:03,869 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:02:03 CST 2016]; root of context hierarchy
+2016-01-18 18:02:03,916 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:02:04,012 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3578436e: defining beans [job1]; root of factory hierarchy
+2016-01-18 18:02:27,892 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:02:27 CST 2016]; root of context hierarchy
+2016-01-18 18:02:27,931 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:02:28,013 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3578436e: defining beans [job1]; root of factory hierarchy
+2016-01-18 18:02:41,512 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:02:41 CST 2016]; root of context hierarchy
+2016-01-18 18:02:41,546 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:02:41,647 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3578436e: defining beans [job1]; root of factory hierarchy
+2016-01-18 18:07:14,382 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:07:14 CST 2016]; root of context hierarchy
+2016-01-18 18:07:14,421 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:07:14,520 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@5c072e3f: defining beans [quartzJob,jobtask,doTime]; root of factory hierarchy
+2016-01-18 18:07:14,589 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@5c072e3f: defining beans [quartzJob,jobtask,doTime]; root of factory hierarchy
+2016-01-18 18:12:58,162 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:12:58 CST 2016]; root of context hierarchy
+2016-01-18 18:12:58,198 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:12:58,286 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:12:58,328 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:17:40,356 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:17:40 CST 2016]; root of context hierarchy
+2016-01-18 18:17:40,391 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:17:40,479 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:17:40,527 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:18:38,672 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:18:38 CST 2016]; root of context hierarchy
+2016-01-18 18:18:38,726 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:18:38,827 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:18:38,875 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:21:20,401 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:21:20 CST 2016]; root of context hierarchy
+2016-01-18 18:21:20,440 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:21:20,545 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:21:20,593 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:22:27,817 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 18:22:27 CST 2016]; root of context hierarchy
+2016-01-18 18:22:27,858 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 18:22:27,944 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 18:22:27,989 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 19:52:59,449 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 19:52:59 CST 2016]; root of context hierarchy
+2016-01-18 19:52:59,634 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 19:53:00,018 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 19:53:00,092 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 19:54:33,443 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 19:54:33 CST 2016]; root of context hierarchy
+2016-01-18 19:54:33,478 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 19:54:33,563 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 19:54:33,630 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [quartzJob,jobtask,doTime,startQuertz]; root of factory hierarchy
+2016-01-18 19:57:34,152 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 19:57:34 CST 2016]; root of context hierarchy
+2016-01-18 19:57:34,200 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 19:57:34,290 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 19:57:34,404 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 19:58:31,882 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 19:58:31 CST 2016]; root of context hierarchy
+2016-01-18 19:58:31,924 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 19:58:32,010 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 19:58:32,183 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 19:59:45,288 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4520ebad: startup date [Mon Jan 18 19:59:45 CST 2016]; root of context hierarchy
+2016-01-18 19:59:45,323 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 19:59:45,414 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 19:59:45,491 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@954b04f: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 20:02:46,818 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:02:46 CST 2016]; root of context hierarchy
+2016-01-18 20:02:46,858 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:02:46,963 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 20:02:47,194 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 20:02:47,235 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 20:02:47,239 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 20:02:47,245 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 20:02:47,245 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'scheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 20:02:47,245 [main] INFO  StdSchedulerFactory - Quartz scheduler 'scheduler' initialized from an externally provided properties instance.
+2016-01-18 20:02:47,246 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 20:02:47,247 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 20:02:47,254 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 20:02:47,254 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 20:02:47,255 [main] INFO  QuartzScheduler - Scheduler scheduler_$_NON_CLUSTERED started.
+2016-01-18 20:02:49,181 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 20:03:24,988 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:03:24 CST 2016]; root of context hierarchy
+2016-01-18 20:03:25,025 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:03:25,112 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [taskJob,jobDetail,myTrigger,scheduler]; root of factory hierarchy
+2016-01-18 20:03:25,219 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 20:03:25,230 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 20:03:25,232 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 20:03:25,233 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 20:03:25,234 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'scheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 20:03:25,234 [main] INFO  StdSchedulerFactory - Quartz scheduler 'scheduler' initialized from an externally provided properties instance.
+2016-01-18 20:03:25,234 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 20:03:25,235 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 20:03:25,239 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 20:03:25,239 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 20:03:25,239 [main] INFO  QuartzScheduler - Scheduler scheduler_$_NON_CLUSTERED started.
+2016-01-18 20:03:28,484 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 20:17:38,190 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:17:38 CST 2016]; root of context hierarchy
+2016-01-18 20:17:38,255 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:17:38,372 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 20:17:38,373 [main] INFO  DefaultListableBeanFactory - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 20:18:10,589 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:18:10 CST 2016]; root of context hierarchy
+2016-01-18 20:18:10,764 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:18:11,007 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 20:18:11,323 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 20:18:11,335 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 20:18:11,336 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 20:18:11,337 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 20:18:11,338 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'synWarningsTriggerScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 20:18:11,338 [main] INFO  StdSchedulerFactory - Quartz scheduler 'synWarningsTriggerScheduler' initialized from an externally provided properties instance.
+2016-01-18 20:18:11,338 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 20:18:11,339 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 20:18:11,344 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 20:18:11,344 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 20:18:11,344 [main] INFO  QuartzScheduler - Scheduler synWarningsTriggerScheduler_$_NON_CLUSTERED started.
+2016-01-18 20:18:12,888 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 20:19:07,755 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:19:07 CST 2016]; root of context hierarchy
+2016-01-18 20:19:09,103 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:19:10,939 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 20:19:18,139 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 20:19:19,212 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 20:19:19,214 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 20:19:19,407 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 20:19:19,409 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'synWarningsTriggerScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 20:19:19,410 [main] INFO  StdSchedulerFactory - Quartz scheduler 'synWarningsTriggerScheduler' initialized from an externally provided properties instance.
+2016-01-18 20:19:19,410 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 20:19:19,490 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 20:19:19,671 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 20:19:19,672 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 20:19:19,672 [main] INFO  QuartzScheduler - Scheduler synWarningsTriggerScheduler_$_NON_CLUSTERED started.
+2016-01-18 20:19:20,789 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 20:27:51,356 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 20:27:51 CST 2016]; root of context hierarchy
+2016-01-18 20:27:51,430 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 20:27:52,189 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 20:27:52,847 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 20:27:52,860 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 20:27:52,861 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 20:27:52,862 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 20:27:52,862 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'synWarningsTriggerScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 20:27:52,862 [main] INFO  StdSchedulerFactory - Quartz scheduler 'synWarningsTriggerScheduler' initialized from an externally provided properties instance.
+2016-01-18 20:27:52,862 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 20:27:52,863 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 20:27:52,918 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 20:27:52,919 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 20:27:52,919 [main] INFO  QuartzScheduler - Scheduler synWarningsTriggerScheduler_$_NON_CLUSTERED started.
+2016-01-18 20:27:54,368 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 21:05:08,900 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 21:05:08 CST 2016]; root of context hierarchy
+2016-01-18 21:05:09,587 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 21:05:09,881 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@78186a70: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 21:05:11,409 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 21:05:11,483 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 21:05:11,485 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 21:05:11,487 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 21:05:11,488 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'synWarningsTriggerScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 21:05:11,488 [main] INFO  StdSchedulerFactory - Quartz scheduler 'synWarningsTriggerScheduler' initialized from an externally provided properties instance.
+2016-01-18 21:05:11,488 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 21:05:11,490 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@309e345f
+2016-01-18 21:05:11,498 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 21:05:11,499 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 21:05:11,499 [main] INFO  QuartzScheduler - Scheduler synWarningsTriggerScheduler_$_NON_CLUSTERED started.
+2016-01-18 21:05:13,677 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2016-01-18 21:27:28,867 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 21:27:28 CST 2016]; root of context hierarchy
+2016-01-18 21:27:28,947 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 21:27:29,050 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6ec8211c: defining beans []; root of factory hierarchy
+2016-01-18 21:28:50,764 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 21:28:50 CST 2016]; root of context hierarchy
+2016-01-18 21:28:50,844 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 21:28:50,959 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6ec8211c: defining beans []; root of factory hierarchy
+2016-01-18 21:33:08,231 [main] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7dc7cbad: startup date [Mon Jan 18 21:33:08 CST 2016]; root of context hierarchy
+2016-01-18 21:33:08,305 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2016-01-18 21:33:08,397 [main] INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [scheduledJobs/syncWarnings.xml]
+2016-01-18 21:33:08,539 [main] INFO  DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@df27fae: defining beans [synWarningsJob,synWarningsDetail,synWarningsTrigger,synWarningsTriggerScheduler]; root of factory hierarchy
+2016-01-18 21:33:08,736 [main] INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+2016-01-18 21:33:08,748 [main] INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-01-18 21:33:08,749 [main] INFO  QuartzScheduler - Quartz Scheduler v.2.1.6 created.
+2016-01-18 21:33:08,751 [main] INFO  RAMJobStore - RAMJobStore initialized.
+2016-01-18 21:33:08,752 [main] INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.1.6) 'synWarningsTriggerScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-01-18 21:33:08,752 [main] INFO  StdSchedulerFactory - Quartz scheduler 'synWarningsTriggerScheduler' initialized from an externally provided properties instance.
+2016-01-18 21:33:08,752 [main] INFO  StdSchedulerFactory - Quartz scheduler version: 2.1.6
+2016-01-18 21:33:08,754 [main] INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@318ba8c8
+2016-01-18 21:33:08,758 [main] INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2016-01-18 21:33:08,758 [main] INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+2016-01-18 21:33:08,758 [main] INFO  QuartzScheduler - Scheduler synWarningsTriggerScheduler_$_NON_CLUSTERED started.
+2016-01-18 21:33:10,476 [Timer-0] INFO  UpdateChecker - New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
