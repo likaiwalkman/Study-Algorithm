@@ -53,7 +53,7 @@ public class OperationClient {
 
     public static void main(String[] args) throws Exception {
 //        query("localhost", 8090);//A+B
-        int                  size       = 50;
+        int                  size       = 10;
         ExecutorService      exeService = Executors.newFixedThreadPool(size);
         final CountDownLatch latch      = new CountDownLatch(size);
         for (int i = 0; i < size; i++) {
