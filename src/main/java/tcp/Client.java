@@ -18,7 +18,9 @@ public class Client {
             for (int i = 0; i < 10; i++) {
                 ous.write(i);
             }
-            ous.close();
+//            ous.close();
+            client.shutdownOutput();
+
             OutputStream fous = new FileOutputStream(new File("haha"));
             int pos= -1;
             while((pos=client.getInputStream().read())!=-1){

@@ -31,7 +31,7 @@ public class Server {
 
                         }
                         System.out.println("haha");
-                        String fileName = "/Users/victor/git/Study-Algorithm/src/main/java/tcp/Client.java";
+                        String fileName = "E:\\home\\deploy\\langs\\logs\\2016-01-18.log";
                         System.out.println("hehe");
                         File file = new File(fileName);
                         System.out.println(file.getName());
@@ -41,7 +41,8 @@ public class Server {
                             System.out.println(pos);
                             socket.getOutputStream().write(pos);
                         }
-                        socket.getOutputStream().close();
+//                        socket.getOutputStream().close();
+                        socket.shutdownOutput();
                         //socket.getInputStream().close();
 
 
