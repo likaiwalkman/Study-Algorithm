@@ -162,7 +162,7 @@ public class WordCounter {
     }
 
 /* ......................................................................................... */
-    
+    //arg:word aaa 5
     public static void main(String[] args) throws IOException {
         WordCounter wordCounter = new WordCounter();
         Folder folder = Folder.fromDirectory(new File(args[0]));
