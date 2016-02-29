@@ -1,26 +1,26 @@
 package asyn.multithread;
 
 public class EventData {
-	String message;
-	String fromIp;
+    String message;
+    String fromIp;
 
-	public EventData(String message) {
-		this.message = message;
-	}
+    public EventData(String message) {
+        this.message = message;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public String getFromIp() {
-		return fromIp;
-	}
+    public String getFromIp() {
+        return fromIp;
+    }
 
-	public void setFromIp(String fromIp) {
-		this.fromIp = fromIp;
-	}
+    public void setFromIp(String fromIp) {
+        this.fromIp = fromIp;
+    }
 }

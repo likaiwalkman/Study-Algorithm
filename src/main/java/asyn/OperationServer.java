@@ -148,7 +148,7 @@ public class OperationServer implements Runnable {
     }
 
     /**
-     * ע���¼���selector��
+     * selector init
      */
     public void initSelector() {
         try {

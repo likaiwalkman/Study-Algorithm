@@ -11,17 +11,17 @@ import java.nio.charset.CharsetDecoder;
 public class OperationClient {
 
     // Charset and decoder for US-ASCII
-    private static Charset        charset = Charset.forName("US-ASCII");
+    private static Charset charset = Charset.forName("US-ASCII");
 
     // Direct byte buffer for reading
-    private static ByteBuffer     dbuf    = ByteBuffer.allocateDirect(1024);
+    private static ByteBuffer dbuf = ByteBuffer.allocateDirect(1024);
 
     // Ask the given host what time it is
     //
     private static void query(String host, int port) throws IOException {
-        byte inBuffer[] = new byte[100];
-        InetSocketAddress isa = new InetSocketAddress(InetAddress.getByName(host), port);
-        SocketChannel sc = null;
+        byte              inBuffer[] = new byte[100];
+        InetSocketAddress isa        = new InetSocketAddress(InetAddress.getByName(host), port);
+        SocketChannel     sc         = null;
         while (true) {
             try {
                 System.in.read(inBuffer);
