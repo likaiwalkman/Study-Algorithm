@@ -58,12 +58,12 @@ public class OperationServer implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -72,20 +72,19 @@ public class OperationServer implements Runnable {
         if (serverSocketChannel.equals(serverChannel1)) {
             socketChannel1 = serverSocketChannel.accept();
             socketChannel1.configureBlocking(false);
-//            socketChannel1.register(this.selector, SelectionKey.OP_CONNECT);
             socketChannel1.register(this.selector, SelectionKey.OP_READ);
         } else {
             socketChannel2 = serverSocketChannel.accept();
             socketChannel2.configureBlocking(false);
-//            socketChannel2.register(this.selector, SelectionKey.OP_CONNECT);
             socketChannel2.register(this.selector, SelectionKey.OP_READ);
         }
 
     }
 
-    public void connect(SelectionKey key) {
+    public SocketChannel connect(SelectionKey key) {
         SocketChannel socketChannel = (SocketChannel) key.channel();
         System.out.println(socketChannel);
+        return socketChannel;
     }
 
     public void read(SelectionKey key) throws IOException {
