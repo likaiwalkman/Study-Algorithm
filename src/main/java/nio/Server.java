@@ -39,7 +39,7 @@ public class Server implements Runnable {
                     System.out.println("selectionKey:" +selectionKey);
                     System.out.println("selectionKey's channel:" +selectionKey.channel());
                     System.out.println("selectionKey's channel isOpen:" +selectionKey.channel().isOpen());
-                    if (selectionKey.isValid()) {
+                    if (!selectionKey.isValid()) {
                         selectionKey.cancel();
                         continue;
                     }

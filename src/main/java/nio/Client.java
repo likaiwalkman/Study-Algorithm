@@ -13,6 +13,7 @@ public class Client {
             Socket socket = new Socket();
             System.out.println(socket);
             socket.connect(new InetSocketAddress("localhost", 9090));
+            socket.getOutputStream().write(1);
             socket.shutdownInput();
             socket.shutdownOutput();
 
