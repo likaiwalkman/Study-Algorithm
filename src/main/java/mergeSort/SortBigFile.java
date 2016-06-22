@@ -21,7 +21,9 @@ class ReadTask implements Callable<String>{
         return null;
     }
 }
-
+/**
+*Seudo code for merging big file whose size is bigger than machine physical memory capacity
+*/
 public class SortBigFile {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
