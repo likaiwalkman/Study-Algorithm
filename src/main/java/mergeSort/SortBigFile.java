@@ -43,13 +43,11 @@ public class SortBigFile {
             if (s1 != null && s2 != null) {
                 if (Integer.valueOf(s1) > Integer.valueOf(s2)) {
                     System.out.println(s2);
-                    System.out.println(s1);
+                    future2 = executor.submit(new ReadTask(reader2));
                 } else {
                     System.out.println(s1);
-                    System.out.println(s2);
+                    future1 = executor.submit(new ReadTask(reader1));
                 }
-                future1 = executor.submit(new ReadTask(reader1));
-                future2 = executor.submit(new ReadTask(reader2));
             } else if (s1 != null){
                 System.out.println(s1);
                 future1 = executor.submit(new ReadTask(reader1));
