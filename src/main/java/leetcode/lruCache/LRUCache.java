@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 public class LRUCache {
 
     public static void main(String[] args) {
-        BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+        BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
         //LinkedList<PrintNumTask> queue = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             queue.add(new PrintNumTask(i+1));
@@ -49,7 +49,6 @@ class PrintNumTask implements Runnable {
         System.out.println(num);
     }
 
-    @Override
     public void run() {
 //        try {
 //            Thread.sleep(1000);
