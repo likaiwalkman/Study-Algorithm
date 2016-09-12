@@ -1,24 +1,26 @@
 package nio;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/**
- * Created by victor on 16/3/13.
- */
 public class Client {
-    public static void main(String[] args) {
-        try {
-            Socket socket = new Socket();
-            System.out.println(socket);
-            socket.connect(new InetSocketAddress("localhost", 9090));
-            socket.getOutputStream().write(1);
-            socket.shutdownInput();
-            socket.shutdownOutput();
+    public static void main(String[] args) throws BrokenBarrierException, InterruptedException, FileNotFoundException {
+        /*OutputStream fos = new FileOutputStream("D:/out.txt");
+        System.setOut(new PrintStream(fos));*/
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
+        executorService.submit(new ClientRequest(cyclicBarrier));
+        executorService.submit(new ClientRequest(cyclicBarrier));
+        cyclicBarrier.await();
+        executorService.shutdown();
+        //System.exit(0);
+
     }
 }
