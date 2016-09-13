@@ -28,7 +28,6 @@ public class Server implements Runnable {
             serverChannel.configureBlocking(false);
             serverChannel.socket().bind(new InetSocketAddress("localhost", 9090));
             Selector selector = Selector.open();
-            //| SelectionKey.OP_READ | SelectionKey.OP_WRITE
             serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 
             while (true) {
@@ -69,8 +68,6 @@ public class Server implements Runnable {
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
                         requestBuffer.clear();
 
-                        //TODO
-                        //ByteBuffer byteBuffer = ByteBuffer.allocate(48);
                         int size = socketChannel.read(requestBuffer);
                         if (size > 0) {
                             byte[] bytes = new byte[size];
@@ -83,7 +80,7 @@ public class Server implements Runnable {
                         System.out.println("------------------");
                     }
                     if (selectionKey.isWritable()) {
-                        System.out.print("write event fired");
+                        System.out.println("write event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
 
                         if (bookmark.get(selectionKey) == null) {
@@ -103,8 +100,6 @@ public class Server implements Runnable {
 
                             requestBuffer.flip();
                             requestBuffer.put(writes);
-
-                            //ByteBuffer writeBuffer = ByteBuffer.wrap(writes);
                             System.out.println("begin to write to channel" + ", time : " + new Date() + ", timeMills : " + System.currentTimeMillis());
                             requestBuffer.flip();
                             int mark = socketChannel.write(requestBuffer);
@@ -112,8 +107,6 @@ public class Server implements Runnable {
                             int remaining = requestBuffer.remaining();
                             boolean b = mark + remaining == Settings.count;
                             System.out.println("equaling ? " + b);
-
-                            //TODO remaining part to be wrote afterwards
 
                             System.out.println("end to write to channel" + ", time : " + new Date() + ", timeMills : " + System.currentTimeMillis());
                             System.out.println("------------------");

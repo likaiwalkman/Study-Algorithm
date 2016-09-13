@@ -34,7 +34,7 @@ public class ClientRequest implements Runnable {
                 }
                 System.out.println("ThreadId: "+Thread.currentThread().getId() + ", read:" + read + ", count:" + count +", time:"+new Date()+", timeMills : "+ System.currentTimeMillis());
             }
-            System.out.println("Before sleep, read:" + read);
+            System.out.println("request over, read:" + read);
             //Thread.sleep(5000);
             socket.shutdownInput();
             socket.shutdownOutput();
