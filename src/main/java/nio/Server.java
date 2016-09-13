@@ -64,7 +64,7 @@ public class Server implements Runnable {
                         System.out.println("------------------");
                     }
                     if (selectionKey.isReadable()) {
-                        System.out.print("read event fired");
+                        System.out.println("read event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
                         requestBuffer.clear();
 
@@ -73,7 +73,7 @@ public class Server implements Runnable {
                             byte[] bytes = new byte[size];
                             requestBuffer.flip();
                             requestBuffer.get(bytes);
-                            System.out.print("read content : " + Hex.encodeHexString(bytes));
+                            System.out.println("read content : " + Hex.encodeHexString(bytes));
                         }
 
                         System.out.println("read channel over ");
@@ -83,7 +83,9 @@ public class Server implements Runnable {
                         System.out.println("write event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
 
-                        if (bookmark.get(selectionKey) == null) {
+                        Integer old = bookmark.get(selectionKey);
+
+                        if (old == null) {
                             requestBuffer.clear();
                             requestBuffer.compact();
 
@@ -104,30 +106,36 @@ public class Server implements Runnable {
                             requestBuffer.flip();
                             int mark = socketChannel.write(requestBuffer);
 
-                            int remaining = requestBuffer.remaining();
+                            /*int remaining = requestBuffer.remaining();
                             boolean b = mark + remaining == Settings.count;
-                            System.out.println("equaling ? " + b);
+                            System.out.println("equaling ? " + b);*/
 
-                            System.out.println("end to write to channel" + ", time : " + new Date() + ", timeMills : " + System.currentTimeMillis());
+                            String s = "end to write to channel, write bytes length : %s, time : %s, timeMills : %s, requestBuffer remaining legnth : %s";
+                            System.out.println(String.format(s, mark, new Date(), System.currentTimeMillis(), requestBuffer.remaining()));
                             System.out.println("------------------");
-                            if (remaining == 0) {
+                            bookmark.put(selectionKey, mark);
+                            if (mark == Settings.count) {
                                 bookmark.remove(selectionKey);
+                                System.out.println("channel close, totalWriteLength : " + mark);
+                                bookmark.remove(selectionKey);
+                                context.remove(selectionKey);
                                 socketChannel.close();
-                            } else {
-                                bookmark.put(selectionKey, mark);
                             }
 
                         } else {
                             int mark = socketChannel.write(requestBuffer);
-                            int remaining = requestBuffer.remaining();
-                            if (remaining == 0) {
-                                bookmark.remove(selectionKey);
-                                socketChannel.close();
-                            } else {
-                                Integer old = bookmark.get(selectionKey);
-                                bookmark.put(selectionKey, mark+old);
-                            }
+                            int totalWriteBytesLength = mark + old;
+                            bookmark.put(selectionKey, totalWriteBytesLength);
 
+                            String s = "continue to write to channel, write bytes length : %s, time : %s, timeMills : %s, requestBuffer remaining legnth : %s";
+                            System.out.println(String.format(s, totalWriteBytesLength, new Date(), System.currentTimeMillis(), requestBuffer.remaining()));
+
+                            if (totalWriteBytesLength == Settings.count) {
+                                bookmark.remove(selectionKey);
+                                context.remove(selectionKey);
+                                System.out.println("channel close, totalWriteLength : " + totalWriteBytesLength);
+                                socketChannel.close();
+                            }
                         }
                     }
                 }

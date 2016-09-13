@@ -28,7 +28,7 @@ public class ClientRequest implements Runnable {
                 read = ins.read();
                 if (read == -1) {
                     count--;
-                    Thread.sleep(100);
+                    //Thread.sleep(100);
                     System.out.println("ThreadId: "+Thread.currentThread().getId() + ", read:" + read + ", count:" + count +", time:"+new Date()+", timeMills : "+ System.currentTimeMillis());
                     continue;
                 }
