@@ -1,5 +1,7 @@
 package nio;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -34,11 +36,13 @@ public class ClientRequest implements Runnable {
                 }
                 System.out.println("ThreadId: "+Thread.currentThread().getId() + ", read:" + read + ", count:" + count +", time:"+new Date()+", timeMills : "+ System.currentTimeMillis());
             }
-            System.out.println("request over, read:" + read);
+
             //Thread.sleep(5000);
             socket.shutdownInput();
             socket.shutdownOutput();
 
+            barrier.await();
+            System.out.println("ThreadId: "+Thread.currentThread().getId() +", request over, lastRead:" + read);
         } catch (Exception e) {
             e.printStackTrace();
         }

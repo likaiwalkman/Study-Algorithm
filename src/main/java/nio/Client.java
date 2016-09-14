@@ -1,26 +1,33 @@
 package nio;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Client {
-    public static void main(String[] args) throws BrokenBarrierException, InterruptedException, FileNotFoundException {
+    public static void main(String[] args) throws BrokenBarrierException, InterruptedException, IOException {
         /*OutputStream fos = new FileOutputStream("D:/out.txt");
         System.setOut(new PrintStream(fos));*/
 
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
-        executorService.submit(new ClientRequest(cyclicBarrier));
-        executorService.submit(new ClientRequest(cyclicBarrier));
+        int concurrentSize = 2;
+        ExecutorService executorService = Executors.newFixedThreadPool(concurrentSize);
+
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(concurrentSize+1);
+        for (int i = 0; i < concurrentSize; i++) {
+            executorService.submit(new ClientRequest(cyclicBarrier));
+        }
+
+        //start to fire all tasks to run
         cyclicBarrier.await();
-        executorService.shutdown();
-        //System.exit(0);
+
+        //when all tasks is over, notify main thread
+        cyclicBarrier.await();
+
+        System.out.println("Client over");
+        executorService.shutdownNow();
+        //fos.close();
 
     }
 }

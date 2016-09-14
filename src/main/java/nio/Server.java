@@ -21,8 +21,9 @@ public class Server implements Runnable {
 
     public void run() {
         try {
-            Map<SelectionKey, ByteBuffer> context = new HashMap<SelectionKey, ByteBuffer>();
+            Map<SelectionKey, ByteBuffer> responseContext = new HashMap<SelectionKey, ByteBuffer>();
             Map<SelectionKey, Integer> bookmark = new HashMap<SelectionKey, Integer>();
+            Map<SelectionKey, Integer> requestContext = new HashMap<SelectionKey, Integer>();
 
             ServerSocketChannel serverChannel = ServerSocketChannel.open();
             serverChannel.configureBlocking(false);
@@ -38,10 +39,10 @@ public class Server implements Runnable {
                     SelectionKey selectionKey = selectionKeysIterator.next();
                     selectionKeysIterator.remove();
 
-                    ByteBuffer requestBuffer = context.get(selectionKey);
+                    ByteBuffer requestBuffer = responseContext.get(selectionKey);
                     if (requestBuffer == null) {
                         requestBuffer = ByteBuffer.allocate(Settings.count);
-                        context.put(selectionKey, requestBuffer);
+                        responseContext.put(selectionKey, requestBuffer);
                     }
 
                     if (!selectionKey.isValid()) {
@@ -54,16 +55,14 @@ public class Server implements Runnable {
                         SocketChannel socketChannel = serverChannel.accept();
                         socketChannel.configureBlocking(false);
                         socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-                        System.out.println("channel: " + socketChannel);
+                        System.out.println("accept event over");
                         System.out.println("------------------");
-                    }
-                    if (selectionKey.isConnectable()) {
+                    } else if (selectionKey.isConnectable()) {
                         System.out.print("connect event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
-                        System.out.println("channel: " + socketChannel);
+                        System.out.println("connect event over");
                         System.out.println("------------------");
-                    }
-                    if (selectionKey.isReadable()) {
+                    } else if (selectionKey.isReadable()) {
                         System.out.println("read event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
                         requestBuffer.clear();
@@ -73,42 +72,34 @@ public class Server implements Runnable {
                             byte[] bytes = new byte[size];
                             requestBuffer.flip();
                             requestBuffer.get(bytes);
+                            requestContext.put(selectionKey, size);
                             System.out.println("read content : " + Hex.encodeHexString(bytes));
                         }
 
-                        System.out.println("read channel over ");
+                        System.out.println("read event over ");
                         System.out.println("------------------");
-                    }
-                    if (selectionKey.isWritable()) {
+                    } else if (selectionKey.isWritable()) {
                         System.out.println("write event fired");
                         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
 
+                        Integer size = requestContext.get(selectionKey);
+                        if (size == null) {
+                            System.out.println("no request data");
+                            continue;
+                        }
+
                         Integer old = bookmark.get(selectionKey);
 
+                        //still no data sent out
                         if (old == null) {
                             requestBuffer.clear();
-                            requestBuffer.compact();
 
-                            byte[] writes = new byte[Settings.count];
-                            boolean flip = false;
-                            for (int i = 0; i < writes.length; i++) {
-                                flip = !flip;
-                                if (flip) {
-                                    writes[i] = 0;
-                                } else {
-                                    writes[i] = 1;
-                                }
+                            for (int i = 0; i < Settings.count; i++) {
+                                requestBuffer.put((byte) (i % 2 == 0 ? 0 : 1));
                             }
-
-                            requestBuffer.flip();
-                            requestBuffer.put(writes);
                             System.out.println("begin to write to channel" + ", time : " + new Date() + ", timeMills : " + System.currentTimeMillis());
                             requestBuffer.flip();
                             int mark = socketChannel.write(requestBuffer);
-
-                            /*int remaining = requestBuffer.remaining();
-                            boolean b = mark + remaining == Settings.count;
-                            System.out.println("equaling ? " + b);*/
 
                             String s = "end to write to channel, write bytes length : %s, time : %s, timeMills : %s, requestBuffer remaining legnth : %s";
                             System.out.println(String.format(s, mark, new Date(), System.currentTimeMillis(), requestBuffer.remaining()));
@@ -118,7 +109,7 @@ public class Server implements Runnable {
                                 bookmark.remove(selectionKey);
                                 System.out.println("channel close, totalWriteLength : " + mark);
                                 bookmark.remove(selectionKey);
-                                context.remove(selectionKey);
+                                responseContext.remove(selectionKey);
                                 socketChannel.close();
                             }
 
@@ -132,7 +123,7 @@ public class Server implements Runnable {
 
                             if (totalWriteBytesLength == Settings.count) {
                                 bookmark.remove(selectionKey);
-                                context.remove(selectionKey);
+                                responseContext.remove(selectionKey);
                                 System.out.println("channel close, totalWriteLength : " + totalWriteBytesLength);
                                 socketChannel.close();
                             }
