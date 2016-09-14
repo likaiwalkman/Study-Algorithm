@@ -8,18 +8,20 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.concurrent.CyclicBarrier;
 
-public class ClientRequest implements Runnable {
+public class BlockingClientRequest implements Runnable {
     CyclicBarrier barrier;
 
-    public ClientRequest(CyclicBarrier barrier) {
+    public BlockingClientRequest(CyclicBarrier barrier) {
         this.barrier = barrier;
     }
 
     public void run() {
         try {
-            barrier.await();
+            if (Settings.BLOCKING_SWITCH) {
+                barrier.await();
+            }
             Socket socket = new Socket();
-            socket.connect(new InetSocketAddress("localhost", 9090));
+            socket.connect(new InetSocketAddress(Settings.SERVER_HOST, Settings.SERVER_PORT));
             socket.getOutputStream().write((byte) 1);
 
             InputStream ins = socket.getInputStream();
@@ -41,7 +43,9 @@ public class ClientRequest implements Runnable {
             socket.shutdownInput();
             socket.shutdownOutput();
 
-            barrier.await();
+            if (Settings.BLOCKING_SWITCH) {
+                barrier.await();
+            }
             System.out.println("ThreadId: "+Thread.currentThread().getId() +", request over, lastRead:" + read);
         } catch (Exception e) {
             e.printStackTrace();
