@@ -59,22 +59,29 @@ public class NonBlockingClient implements Runnable {
                     if (sk.isWritable()){
                         Integer bm = bookmark.get(sc);
                         if (bm == null) {
-                            ByteBuffer requestBuffer = requestContext.get(sc);//ByteBuffer.allocate(1);
-                            if (requestBuffer == null) {
-                                requestBuffer = new BASE64Decoder().decodeBufferToByteBuffer(Base64.HTTP_REQUEST);
-                                requestBuffer.flip();
-                                requestContext.put(sc, requestBuffer);
-                            }
+                            bm = 0;
+                            bookmark.put(sc, bm);
+                        }
 
-                            //requestBuffer.put((byte)1);
-                            int write = sc.write(requestBuffer);
-                            if (write == 1) {
-                                bookmark.put(sc, write);
+                        ByteBuffer requestBuffer = requestContext.get(sc);//ByteBuffer.allocate(1);
+                        if (requestBuffer == null) {
+                            requestBuffer = new BASE64Decoder().decodeBufferToByteBuffer(Base64.HTTP_REQUEST);
+//                                requestBuffer.flip();
+                            requestContext.put(sc, requestBuffer);
+                        }
+
+                        if (bm == Base64.HTTP_REQUEST_LENGTH) {
+
+                        } else {
+                            if (bm == 0) {
+                                requestBuffer.flip();
                             }
+                            int writes = sc.write(requestBuffer);
+                            bookmark.put(sc, bm + writes);
                         }
                     }
                     if (sk.isReadable()){
-                        if (bookmark.get(sc) == null) {
+                        if (bookmark.get(sc) < Base64.HTTP_REQUEST_LENGTH) {
                             continue;
                         }
                         ByteBuffer response = responseContext.get(sc);

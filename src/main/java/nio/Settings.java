@@ -8,6 +8,9 @@ public interface Settings {
 
     boolean BLOCKING_SWITCH = true;
 
+//    int SERVER_PORT = 9090;
     int SERVER_PORT = 80;
-    String SERVER_HOST = "www.baidu.com";
+//    String SERVER_HOST = "localhost";
+    String SERVER_HOST = "www.baidu.com";;
+
 }
