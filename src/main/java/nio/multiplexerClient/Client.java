@@ -27,7 +27,8 @@ public class Client {
     public static void main(String[] args) throws IOException {
         Selector selector = Selector.open();
 
-        try (SocketChannel channel = SocketChannel.open()) {
+        try {
+            SocketChannel channel = SocketChannel.open();
             channel.configureBlocking(false);
             channel.register(selector, SelectionKey.OP_CONNECT);
 
@@ -83,7 +84,7 @@ public class Client {
                     if (key.isReadable()) {
                         Map<String, Object> item = context.get(channel);
                         if (item != null) {
-                            if (item.get("count") == 0) {
+                            if ((Integer)item.get("count") == 0) {
                                 ByteBuffer allocateBuffer = ByteBuffer.allocate(2048);
                                 channel.read(allocateBuffer);
                                 allocateBuffer.flip();
@@ -98,6 +99,8 @@ public class Client {
                     }
                 }
             }
+        }catch (Exception e){
+
         }
     }
 }
