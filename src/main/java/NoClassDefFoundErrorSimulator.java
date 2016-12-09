@@ -1,3 +1,6 @@
+/**
+ * http://www.cnblogs.com/jgzh35/p/3278132.html
+ */
 public class NoClassDefFoundErrorSimulator {
     public static void main(String[] args) {
 
