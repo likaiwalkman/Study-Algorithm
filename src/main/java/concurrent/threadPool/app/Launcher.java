@@ -7,11 +7,13 @@ import java.util.concurrent.ExecutorService;
 public class Launcher {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
-        executorService.submit(new Runnable() {
-            public void run() {
-                System.out.println("Over");
-            }
-        });
+        for (int i = 0; i < 1000; i++) {
+            executorService.submit(new Runnable() {
+                public void run() {
+                    System.out.println("Over");
+                }
+            });
+        }
         executorService.shutdown();
     }
 }
