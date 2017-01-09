@@ -1,6 +1,6 @@
-package concurrent.app;
+package concurrent.map.app;
 
-import concurrent.ConcurrentHashMap;
+import concurrent.map.ConcurrentHashMap;
 
 public class Laucher {
     public static void main(String[] args) {
