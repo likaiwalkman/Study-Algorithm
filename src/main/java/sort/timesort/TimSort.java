@@ -19,7 +19,6 @@ class TimSort<T> {
         this.a = a;
         this.c = c;
 
-
         int len = a.length;
         @SuppressWarnings({"unchecked", "UnnecessaryLocalVariable"})
         T[] newArray = (T[]) new Object[len < 2 * INITIAL_TMP_STORAGE_LENGTH ?
@@ -32,7 +31,6 @@ class TimSort<T> {
         runBase = new int[stackLen];
         runLen = new int[stackLen];
     }
-
 
     static <T> void sort(T[] a, Comparator<? super T> c) {
         sort(a, 0, a.length, c);
@@ -49,7 +47,6 @@ class TimSort<T> {
         if (nRemaining < 2)
             return;
 
-
         if (nRemaining < MIN_MERGE) {
             int initRunLen = countRunAndMakeAscending(a, lo, hi, c);
             binarySort(a, lo, hi, lo + initRunLen, c);
@@ -62,22 +59,18 @@ class TimSort<T> {
 
             int runLen = countRunAndMakeAscending(a, lo, hi, c);
 
-
             if (runLen < minRun) {
                 int force = nRemaining <= minRun ? nRemaining : minRun;
                 binarySort(a, lo, lo + force, lo + runLen, c);
                 runLen = force;
             }
 
-
             ts.pushRun(lo, runLen);
             ts.mergeCollapse();
-
 
             lo += runLen;
             nRemaining -= runLen;
         } while (nRemaining != 0);
-
 
         assert lo == hi;
         ts.mergeForceCollapse();
@@ -92,7 +85,6 @@ class TimSort<T> {
             start++;
         for (; start < hi; start++) {
             T pivot = a[start];
-
 
             int left = lo;
             int right = start;
@@ -128,7 +120,6 @@ class TimSort<T> {
         int runHi = lo + 1;
         if (runHi == hi)
             return 1;
-
 
         if (c.compare(a[runHi++], a[lo]) < 0) {
             while (runHi < hi && c.compare(a[runHi], a[runHi - 1]) < 0)
@@ -178,7 +169,6 @@ class TimSort<T> {
             if (ofs > maxOfs)
                 ofs = maxOfs;
 
-
             lastOfs += hint;
             ofs += hint;
         } else {
@@ -193,13 +183,11 @@ class TimSort<T> {
             if (ofs > maxOfs)
                 ofs = maxOfs;
 
-
             int tmp = lastOfs;
             lastOfs = hint - ofs;
             ofs = hint - tmp;
         }
         assert -1 <= lastOfs && lastOfs < ofs && ofs <= len;
-
 
         lastOfs++;
         while (lastOfs < ofs) {
@@ -232,7 +220,6 @@ class TimSort<T> {
             if (ofs > maxOfs)
                 ofs = maxOfs;
 
-
             int tmp = lastOfs;
             lastOfs = hint - ofs;
             ofs = hint - tmp;
@@ -248,12 +235,10 @@ class TimSort<T> {
             if (ofs > maxOfs)
                 ofs = maxOfs;
 
-
             lastOfs += hint;
             ofs += hint;
         }
         assert -1 <= lastOfs && lastOfs < ofs && ofs <= len;
-
 
         lastOfs++;
         while (lastOfs < ofs) {
@@ -320,14 +305,12 @@ class TimSort<T> {
         assert len1 > 0 && len2 > 0;
         assert base1 + len1 == base2;
 
-
         runLen[i] = len1 + len2;
         if (i == stackSize - 3) {
             runBase[i + 1] = runBase[i + 2];
             runLen[i + 1] = runLen[i + 2];
         }
         stackSize--;
-
 
         int k = gallopRight(a[base2], a, base1, len1, 0, c);
         assert k >= 0;
@@ -336,12 +319,10 @@ class TimSort<T> {
         if (len1 == 0)
             return;
 
-
         len2 = gallopLeft(a[base1 + len1 - 1], a, base2, len2, len2 - 1, c);
         assert len2 >= 0;
         if (len2 == 0)
             return;
-
 
         if (len1 <= len2)
             mergeLo(base1, len1, base2, len2);
@@ -352,7 +333,6 @@ class TimSort<T> {
     private void mergeLo(int base1, int len1, int base2, int len2) {
         assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
-
         T[] a = this.a;
         T[] tmp = ensureCapacity(len1);
         System.arraycopy(a, base1, tmp, 0, len1);
@@ -360,7 +340,6 @@ class TimSort<T> {
         int cursor1 = 0;
         int cursor2 = base2;
         int dest = base1;
-
 
         a[dest++] = a[cursor2++];
         if (--len2 == 0) {
@@ -380,7 +359,6 @@ class TimSort<T> {
             int count1 = 0;
             int count2 = 0;
 
-
             do {
                 assert len1 > 1 && len2 > 0;
                 if (c.compare(a[cursor2], tmp[cursor1]) < 0) {
@@ -397,7 +375,6 @@ class TimSort<T> {
                         break outer;
                 }
             } while ((count1 | count2) < minGallop);
-
 
             do {
                 assert len1 > 1 && len2 > 0;
@@ -451,7 +428,6 @@ class TimSort<T> {
     private void mergeHi(int base1, int len1, int base2, int len2) {
         assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
-
         T[] a = this.a;
         T[] tmp = ensureCapacity(len2);
         System.arraycopy(a, base2, tmp, 0, len2);
@@ -459,7 +435,6 @@ class TimSort<T> {
         int cursor1 = base1 + len1 - 1;
         int cursor2 = len2 - 1;
         int dest = base2 + len2 - 1;
-
 
         a[dest--] = a[cursor1--];
         if (--len1 == 0) {
@@ -481,7 +456,6 @@ class TimSort<T> {
             int count1 = 0;
             int count2 = 0;
 
-
             do {
                 assert len1 > 0 && len2 > 1;
                 if (c.compare(tmp[cursor2], a[cursor1]) < 0) {
@@ -498,7 +472,6 @@ class TimSort<T> {
                         break outer;
                 }
             } while ((count1 | count2) < minGallop);
-
 
             do {
                 assert len1 > 0 && len2 > 1;

@@ -1,4 +1,4 @@
-package sort.timesort;
+package sort.app;
 
 import java.util.ArrayList;
 import java.util.Arrays;

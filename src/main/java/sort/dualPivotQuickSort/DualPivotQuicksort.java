@@ -1,8 +1,6 @@
 package sort.dualPivotQuickSort;
 
-
-final class DualPivotQuicksort {
-
+public final class DualPivotQuicksort {
 
     private static final int MAX_RUN_COUNT                             = 67;
     private static final int MAX_RUN_LENGTH                            = 33;
@@ -13,7 +11,6 @@ final class DualPivotQuicksort {
     private static final int NUM_SHORT_VALUES                          = 1 << 16;
     private static final int NUM_CHAR_VALUES                           = 1 << 16;
     private static final int NUM_BYTE_VALUES                           = 1 << 8;
-
 
     private DualPivotQuicksort() {
     }
@@ -29,11 +26,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -54,20 +49,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         int[] b;
         byte odd = 0;
@@ -80,7 +72,6 @@ final class DualPivotQuicksort {
         } else {
             b = new int[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -109,8 +100,6 @@ final class DualPivotQuicksort {
 
     private static void sort(int[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
-
-
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
 
@@ -131,7 +120,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     int a1 = a[k], a2 = a[left];
@@ -160,16 +148,12 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
-
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             int t = a[e2];
@@ -217,7 +201,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -226,14 +209,11 @@ final class DualPivotQuicksort {
             int pivot1 = a[e2];
             int pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -262,16 +242,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -282,7 +259,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -311,13 +287,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             int pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -345,7 +319,6 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
         }
@@ -362,11 +335,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -387,20 +358,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         long[] b;
         byte odd = 0;
@@ -413,7 +381,6 @@ final class DualPivotQuicksort {
         } else {
             b = new long[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -443,7 +410,6 @@ final class DualPivotQuicksort {
     private static void sort(long[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
 
-
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
 
@@ -464,7 +430,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     long a1 = a[k], a2 = a[left];
@@ -493,16 +458,13 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
 
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             long t = a[e2];
@@ -550,7 +512,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -559,14 +520,11 @@ final class DualPivotQuicksort {
             long pivot1 = a[e2];
             long pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -595,16 +553,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -615,7 +570,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -644,13 +598,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             long pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -677,7 +629,6 @@ final class DualPivotQuicksort {
                     --great;
                 }
             }
-
 
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -718,11 +669,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -743,20 +692,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         short[] b;
         byte odd = 0;
@@ -769,7 +715,6 @@ final class DualPivotQuicksort {
         } else {
             b = new short[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -799,7 +744,6 @@ final class DualPivotQuicksort {
     private static void sort(short[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
 
-
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
 
@@ -820,7 +764,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     short a1 = a[k], a2 = a[left];
@@ -849,16 +792,13 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
 
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             short t = a[e2];
@@ -906,7 +846,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -915,14 +854,11 @@ final class DualPivotQuicksort {
             short pivot1 = a[e2];
             short pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -951,16 +887,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -971,7 +904,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -1000,13 +932,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             short pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -1033,7 +963,6 @@ final class DualPivotQuicksort {
                     --great;
                 }
             }
-
 
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -1074,11 +1003,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -1099,20 +1026,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         char[] b;
         byte odd = 0;
@@ -1125,7 +1049,6 @@ final class DualPivotQuicksort {
         } else {
             b = new char[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -1155,7 +1078,6 @@ final class DualPivotQuicksort {
     private static void sort(char[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
 
-
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
 
@@ -1176,7 +1098,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     char a1 = a[k], a2 = a[left];
@@ -1205,16 +1126,13 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
 
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             char t = a[e2];
@@ -1262,7 +1180,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -1271,14 +1188,11 @@ final class DualPivotQuicksort {
             char pivot1 = a[e2];
             char pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -1307,16 +1221,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -1327,7 +1238,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -1356,13 +1266,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             char pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -1390,7 +1298,6 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
         }
@@ -1399,7 +1306,6 @@ final class DualPivotQuicksort {
     public static void sort(byte[] a) {
         sort(a, 0, a.length - 1);
     }
-
 
     public static void sort(byte[] a, int left, int right) {
 
@@ -1433,11 +1339,9 @@ final class DualPivotQuicksort {
         }
     }
 
-
     public static void sort(float[] a) {
         sort(a, 0, a.length - 1);
     }
-
 
     public static void sort(float[] a, int left, int right) {
 
@@ -1453,12 +1357,9 @@ final class DualPivotQuicksort {
             }
         }
 
-
         doSort(a, left, right);
 
-
         int hi = right;
-
 
         while (left < hi) {
             int middle = (left + hi) >>> 1;
@@ -1471,11 +1372,9 @@ final class DualPivotQuicksort {
             }
         }
 
-
         while (left <= right && Float.floatToRawIntBits(a[left]) < 0) {
             ++left;
         }
-
 
         for (int k = left, p = left - 1; ++k <= right; ) {
             float ak = a[k];
@@ -1489,7 +1388,6 @@ final class DualPivotQuicksort {
         }
     }
 
-
     private static void doSort(float[] a, int left, int right) {
 
         if (right - left < QUICKSORT_THRESHOLD) {
@@ -1497,11 +1395,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -1522,20 +1418,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         float[] b;
         byte odd = 0;
@@ -1548,7 +1441,6 @@ final class DualPivotQuicksort {
         } else {
             b = new float[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -1575,10 +1467,8 @@ final class DualPivotQuicksort {
         }
     }
 
-
     private static void sort(float[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
-
 
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
@@ -1600,7 +1490,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     float a1 = a[k], a2 = a[left];
@@ -1629,16 +1518,13 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
 
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             float t = a[e2];
@@ -1686,7 +1572,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -1695,14 +1580,11 @@ final class DualPivotQuicksort {
             float pivot1 = a[e2];
             float pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -1731,16 +1613,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -1751,7 +1630,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -1780,13 +1658,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             float pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -1814,17 +1690,14 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
         }
     }
 
-
     public static void sort(double[] a) {
         sort(a, 0, a.length - 1);
     }
-
 
     public static void sort(double[] a, int left, int right) {
 
@@ -1840,12 +1713,9 @@ final class DualPivotQuicksort {
             }
         }
 
-
         doSort(a, left, right);
 
-
         int hi = right;
-
 
         while (left < hi) {
             int middle = (left + hi) >>> 1;
@@ -1858,11 +1728,9 @@ final class DualPivotQuicksort {
             }
         }
 
-
         while (left <= right && Double.doubleToRawLongBits(a[left]) < 0) {
             ++left;
         }
-
 
         for (int k = left, p = left - 1; ++k <= right; ) {
             double ak = a[k];
@@ -1876,7 +1744,6 @@ final class DualPivotQuicksort {
         }
     }
 
-
     private static void doSort(double[] a, int left, int right) {
 
         if (right - left < QUICKSORT_THRESHOLD) {
@@ -1884,11 +1751,9 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0;
         run[0] = left;
-
 
         for (int k = left; k < right; run[count] = k) {
             if (a[k] < a[k + 1]) {
@@ -1909,20 +1774,17 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
                 return;
             }
         }
 
-
         if (run[count] == right++) {
             run[++count] = right;
         } else if (count == 1) {
             return;
         }
-
 
         double[] b;
         byte odd = 0;
@@ -1935,7 +1797,6 @@ final class DualPivotQuicksort {
         } else {
             b = new double[a.length];
         }
-
 
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
@@ -1962,10 +1823,8 @@ final class DualPivotQuicksort {
         }
     }
 
-
     private static void sort(double[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
-
 
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
@@ -1987,7 +1846,6 @@ final class DualPivotQuicksort {
                         return;
                     }
                 } while (a[++left] >= a[left - 1]);
-
 
                 for (int k = left; ++left <= right; k = ++left) {
                     double a1 = a[k], a2 = a[left];
@@ -2016,16 +1874,13 @@ final class DualPivotQuicksort {
             return;
         }
 
-
         int seventh = (length >> 3) + (length >> 6) + 1;
-
 
         int e3 = (left + right) >>> 1;
         int e2 = e3 - seventh;
         int e1 = e2 - seventh;
         int e4 = e3 + seventh;
         int e5 = e4 + seventh;
-
 
         if (a[e2] < a[e1]) {
             double t = a[e2];
@@ -2073,7 +1928,6 @@ final class DualPivotQuicksort {
             }
         }
 
-
         int less = left;
         int great = right;
 
@@ -2082,14 +1936,11 @@ final class DualPivotQuicksort {
             double pivot1 = a[e2];
             double pivot2 = a[e4];
 
-
             a[e2] = a[left];
             a[e4] = a[right];
 
-
             while (a[++less] < pivot1) ;
             while (a[--great] > pivot2) ;
-
 
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -2118,16 +1969,13 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             a[left] = a[less - 1];
             a[less - 1] = pivot1;
             a[right] = a[great + 1];
             a[great + 1] = pivot2;
 
-
             sort(a, left, less - 2, leftmost);
             sort(a, great + 2, right, false);
-
 
             if (less < e1 && e5 < great) {
 
@@ -2138,7 +1986,6 @@ final class DualPivotQuicksort {
                 while (a[great] == pivot2) {
                     --great;
                 }
-
 
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -2167,13 +2014,11 @@ final class DualPivotQuicksort {
                 }
             }
 
-
             sort(a, less, great, false);
 
         } else {
 
             double pivot = a[e3];
-
 
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -2200,7 +2045,6 @@ final class DualPivotQuicksort {
                     --great;
                 }
             }
-
 
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
