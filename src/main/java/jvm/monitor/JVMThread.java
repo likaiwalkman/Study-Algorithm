@@ -41,22 +41,22 @@ public class JVMThread implements JVMThreadMBean {
         }
     }
 
-    @Override
+    
     public int getDaemonThreadCount() {
         return this.threadMXBean.getDaemonThreadCount();
     }
 
-    @Override
+    
     public int getThreadCount() {
         return this.threadMXBean.getThreadCount();
     }
 
-    @Override
+    
     public long getTotalStartedThreadCount() {
         return this.threadMXBean.getTotalStartedThreadCount();
     }
 
-    @Override
+    
     public int getDeadLockedThreadCount() {
 //        return this.getDeadLockedThreadCount();
         try {
@@ -70,7 +70,7 @@ public class JVMThread implements JVMThreadMBean {
         }
     }
 
-    @Override
+    
     public String getDeadLockedThreadInfo() {
 //        return this.getDeadLockedThreadInfo();
         StringBuilder stringBuilder = new StringBuilder();
@@ -91,7 +91,7 @@ public class JVMThread implements JVMThreadMBean {
         return deadLockedThreadInfo;
     }
 
-    @Override
+    
     public String getBlockedThreadInfo() {
         if (null != this.blockedThreadInfo && this.blockedThreadInfo.length() > this.maxStackTraceLength) {
             this.blockedThreadInfo = this.blockedThreadInfo.substring(0, this.maxStackTraceLength);
@@ -99,37 +99,37 @@ public class JVMThread implements JVMThreadMBean {
         return this.blockedThreadInfo;
     }
 
-    @Override
+    
     public int getRunnableThreadCount() {
         return this.getThreadCountByState(Thread.State.RUNNABLE.name());
     }
 
-    @Override
+    
     public int getNewThreadCount() {
         return this.getThreadCountByState(Thread.State.NEW.name());
     }
 
-    @Override
+    
     public int getBlockedThreadCount() {
         return this.getThreadCountByState(Thread.State.BLOCKED.name());
     }
 
-    @Override
+    
     public int getWaitingThreadCount() {
         return this.getThreadCountByState(Thread.State.WAITING.name());
     }
 
-    @Override
+    
     public int getTimedWaitingThreadCount() {
         return this.getThreadCountByState(Thread.State.TIMED_WAITING.name());
     }
 
-    @Override
+    
     public int getTerminatedThreadCount() {
         return this.getThreadCountByState(Thread.State.TERMINATED.name());
     }
 
-    @Override
+    
     public BigDecimal getProcessCpuTimeRate() {
         long cupTime = this.operatingSystemMXBean.getProcessCpuTime();
         long upTime = this.runtimeMXBean.getUptime();
@@ -150,7 +150,7 @@ public class JVMThread implements JVMThreadMBean {
         return cpuRate;
     }
 
-    @Override
+    
     public String getPID() {
         return this.operatingSystemMXBean.getName().split("@")[0];
     }
@@ -181,5 +181,17 @@ public class JVMThread implements JVMThreadMBean {
 
     private ThreadInfo[] dumpAllThreads() {
         return this.threadMXBean.dumpAllThreads(false, false);
+    }
+
+    @Override
+    public String toString() {
+        return "JVMThread{" +
+                "\nlastCPUTime=" + lastCPUTime +
+                "\n, lastCPUUpTime=" + lastCPUUpTime +
+                "\n, operatingSystemMXBean=" + operatingSystemMXBean +
+                "\n, runtimeMXBean=" + runtimeMXBean +
+                "\n, threadMXBean=" + threadMXBean +
+                "\n, blockedThreadInfo='" + blockedThreadInfo + '\'' +
+                "\n}";
     }
 }

@@ -36,27 +36,27 @@ public class JVMInfo implements JVMInfoMBean {
         return this.properties.getProperty(key);
     }
 
-    @Override
+    
     public Date getStartDate() {
         return new Date(this.runtimeMXBean.getStartTime());
     }
 
-    @Override
+    
     public String getJVM() {
         return this.runtimeMXBean.getVmName() + "(" + this.runtimeMXBean.getVmVersion() + "." + this.getSystemProperty("java.vm.info") + ")";
     }
 
-    @Override
+    
     public String getJavaVersion() {
         return this.getSystemProperty("java.version");
     }
 
-    @Override
+    
     public String getPID() {
         return JVMUtil.getPID();
     }
 
-    @Override
+    
     public String getInputArguments() {
         if (null == this.inputArguments) {
             this.inputArguments = this.runtimeMXBean.getInputArguments().toString();
@@ -64,47 +64,47 @@ public class JVMInfo implements JVMInfoMBean {
         return this.inputArguments;
     }
 
-    @Override
+    
     public String getJavaHome() {
         return this.getSystemProperty("java.home");
     }
 
-    @Override
+    
     public String getArch() {
         return this.getSystemProperty("os.arch");
     }
 
-    @Override
+    
     public String getOSName() {
         return this.getSystemProperty("os.name");
     }
 
-    @Override
+    
     public String getOSVersion() {
         return this.getSystemProperty("os.version");
     }
 
-    @Override
+    
     public String getVMVendor() {
         return this.getSystemProperty("java.vm.vendor");
     }
 
-    @Override
+    
     public String getSpecName() {
         return this.getSystemProperty("java.vm.specification.name");
     }
 
-    @Override
+    
     public String getSpecVendor() {
         return this.getSystemProperty("java.vm.specification.vendor");
     }
 
-    @Override
+    
     public String getJavaSpecificationVersion() {
         return this.getSystemProperty("java.specification.version");
     }
 
-    @Override
+    
     public String getJavaLibraryPath() {
         String javaLibraryPath = this.getSystemProperty("java.library.path");
         if (StringUtils.isNotBlank(javaLibraryPath) && javaLibraryPath.length() > JVMInfo.MAX_LIBRARY_PATH_LENGTH) {
@@ -113,27 +113,27 @@ public class JVMInfo implements JVMInfoMBean {
         return javaLibraryPath;
     }
 
-    @Override
+    
     public String getManagementSpecVersion() {
         return this.runtimeMXBean.getManagementSpecVersion();
     }
 
-    @Override
+    
     public String getFileEncode() {
         return this.getSystemProperty("file.encoding");
     }
 
-    @Override
+    
     public String getClassPath() {
         return this.getSystemProperty("java.class.path");
     }
 
-    @Override
+    
     public String getBootClassPath() {
         return this.getSystemProperty("sun.boot.class.path");
     }
 
-    @Override
+    
     public int getAvailableProcessors() {
         if (this.availableProcessors == 0) {
             this.availableProcessors = Runtime.getRuntime().availableProcessors();
@@ -141,28 +141,40 @@ public class JVMInfo implements JVMInfoMBean {
         return this.availableProcessors;
     }
 
-    @Override
+    
     public int getLoadedClassCount() {
         return this.classLoadingMXBean.getLoadedClassCount();
     }
 
-    @Override
+    
     public long getTotalLoadedClassCount() {
         return this.classLoadingMXBean.getTotalLoadedClassCount();
     }
 
-    @Override
+    
     public long getUnloadedClassCount() {
         return this.classLoadingMXBean.getUnloadedClassCount();
     }
 
-    @Override
+    
     public String getJITCompilerName() {
         return this.compilationMXBean.getName();
     }
 
-    @Override
+    
     public long getTotalCompilationTime() {
         return this.compilationMXBean.getTotalCompilationTime();
+    }
+
+    @Override
+    public String toString() {
+        return "JVMInfo{" +
+                "\nruntimeMXBean=" + runtimeMXBean +
+                "\n, classLoadingMXBean=" + classLoadingMXBean +
+                "\n, compilationMXBean=" + compilationMXBean +
+                "\n, properties=" + properties +
+                "\n, inputArguments='" + inputArguments + '\'' +
+                "\n, availableProcessors=" + getAvailableProcessors() +
+                "\n}";
     }
 }

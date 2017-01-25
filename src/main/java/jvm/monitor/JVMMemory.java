@@ -20,7 +20,7 @@ public class JVMMemory implements JVMMemoryMBean {
     private MemoryPoolMXBean edenSpaceMXBean;
     private MemoryPoolMXBean psSurvivorSpaceMXBean;
 
-    private static JVMMemory getInstance() {
+    public static JVMMemory getInstance() {
         return JVMMemory.instance;
     }
 
@@ -56,47 +56,47 @@ public class JVMMemory implements JVMMemoryMBean {
         }
     }
 
-    @Override
+    
     public long getHeapMemoryCommitted() {
         return this.memoryMXBean.getHeapMemoryUsage().getCommitted();
     }
 
-    @Override
+    
     public long getHeapMemoryInit() {
         return this.memoryMXBean.getHeapMemoryUsage().getInit();
     }
 
-    @Override
+    
     public long getHeapMemoryMax() {
         return this.memoryMXBean.getHeapMemoryUsage().getMax();
     }
 
-    @Override
+    
     public long getHeapMemoryUsed() {
         return this.memoryMXBean.getHeapMemoryUsage().getUsed();
     }
 
-    @Override
+    
     public long getNonHeapMemoryCommitted() {
         return this.memoryMXBean.getNonHeapMemoryUsage().getCommitted();
     }
 
-    @Override
+    
     public long getNonHeapMemoryInit() {
         return this.memoryMXBean.getNonHeapMemoryUsage().getInit();
     }
 
-    @Override
+    
     public long getNonHeapMemoryMax() {
         return this.memoryMXBean.getNonHeapMemoryUsage().getMax();
     }
 
-    @Override
+    
     public long getNonHeapMemoryUsed() {
         return this.memoryMXBean.getNonHeapMemoryUsage().getUsed();
     }
 
-    @Override
+    
     public long getPermGenCommitted() {
         if (null == this.permGenMXBean) {
             return 0;
@@ -104,7 +104,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.permGenMXBean.getUsage().getCommitted();
     }
 
-    @Override
+    
     public long getPermGenInit() {
         if (null == this.permGenMXBean) {
             return 0;
@@ -112,7 +112,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.permGenMXBean.getUsage().getInit();
     }
 
-    @Override
+    
     public long getPermGenMax() {
         if (null == this.permGenMXBean) {
             return 0;
@@ -120,7 +120,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.permGenMXBean.getUsage().getMax();
     }
 
-    @Override
+    
     public long getPermGenUsed() {
         if (null == this.permGenMXBean) {
             return 0;
@@ -128,7 +128,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.permGenMXBean.getUsage().getUsed();
     }
 
-    @Override
+    
     public long getOldGenCommitted() {
         if (null == this.oldGenMXBean) {
             return 0;
@@ -136,7 +136,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.oldGenMXBean.getUsage().getCommitted();
     }
 
-    @Override
+    
     public long getOldGenInit() {
         if (null == this.oldGenMXBean) {
             return 0;
@@ -144,7 +144,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.oldGenMXBean.getUsage().getInit();
     }
 
-    @Override
+    
     public long getOldGenMax() {
         if (null == this.oldGenMXBean) {
             return 0;
@@ -152,7 +152,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.oldGenMXBean.getUsage().getMax();
     }
 
-    @Override
+    
     public long getOldGenUsed() {
         if (null == this.oldGenMXBean) {
             return 0;
@@ -160,7 +160,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.oldGenMXBean.getUsage().getUsed();
     }
 
-    @Override
+    
     public long getEdenSpaceCommitted() {
         if (null == this.edenSpaceMXBean) {
             return 0;
@@ -168,7 +168,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.edenSpaceMXBean.getUsage().getCommitted();
     }
 
-    @Override
+    
     public long getEdenSpaceInit() {
         if (null == this.edenSpaceMXBean) {
             return 0;
@@ -176,7 +176,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.edenSpaceMXBean.getUsage().getInit();
     }
 
-    @Override
+    
     public long getEdenSpaceMax() {
         if (null == this.edenSpaceMXBean) {
             return 0;
@@ -184,7 +184,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.edenSpaceMXBean.getUsage().getMax();
     }
 
-    @Override
+    
     public long getEdenSpaceUsed() {
         if (null == this.edenSpaceMXBean) {
             return 0;
@@ -192,7 +192,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.edenSpaceMXBean.getUsage().getUsed();
     }
 
-    @Override
+    
     public long getSurvivorCommitted() {
         if (null == this.psSurvivorSpaceMXBean) {
             return 0;
@@ -200,7 +200,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.psSurvivorSpaceMXBean.getUsage().getCommitted();
     }
 
-    @Override
+    
     public long getSurvivorInit() {
         if (null == this.psSurvivorSpaceMXBean) {
             return 0;
@@ -208,7 +208,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.psSurvivorSpaceMXBean.getUsage().getInit();
     }
 
-    @Override
+    
     public long getSurvivorMax() {
         if (null == this.psSurvivorSpaceMXBean) {
             return 0;
@@ -216,7 +216,7 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.psSurvivorSpaceMXBean.getUsage().getMax();
     }
 
-    @Override
+    
     public long getSurvivorUsed() {
         if (null == this.psSurvivorSpaceMXBean) {
             return 0;
@@ -224,8 +224,19 @@ public class JVMMemory implements JVMMemoryMBean {
         return this.psSurvivorSpaceMXBean.getUsage().getUsed();
     }
 
-    @Override
+    
     public String getPID() {
         return JVMUtil.getPID();
+    }
+
+    @Override
+    public String toString() {
+        return "JVMMemory{" +
+                "\nmemoryMXBean=" + memoryMXBean +
+                "\n, permGenMXBean=" + permGenMXBean +
+                "\n, oldGenMXBean=" + oldGenMXBean +
+                "\n, edenSpaceMXBean=" + edenSpaceMXBean +
+                "\n, psSurvivorSpaceMXBean=" + psSurvivorSpaceMXBean +
+                "\n}";
     }
 }
