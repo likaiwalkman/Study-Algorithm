@@ -35,12 +35,13 @@ public class JVMGC implements JVMGCMBean {
     private volatile long lastGCTime;
     private volatile long lastGCUpTime;
 
-    private static final Map<String, Object> fullGCMXBeanNameMap = new HashMap();
-    private static final Map<String, Object> youngGCMXBeanNameMap = new HashMap();
+    private static Map<String, Object> fullGCMXBeanNameMap = new HashMap();
+    private static Map<String, Object> youngGCMXBeanNameMap = new HashMap();
 
 
     private JVMGC() {
-        if (null == fullGCMXBeanNameMap || null == youngGCMXBeanNameMap) {
+        //null == fullGCMXBeanNameMap || null == youngGCMXBeanNameMap
+        if (true) {
             fullGCMXBeanNameMap.put("ConcurrentMarkSweep", null);// -XX:+UseConcMarkSweepGC
             fullGCMXBeanNameMap.put("MarkSweepCompact", null);// -XX:+UseSerialGC
             fullGCMXBeanNameMap.put("PS MarkSweep", null);// -XX:+UseParallelGC and (-XX:+UseParallelOldGC or -XX:+UseParallelOldGCCompacting)
@@ -62,9 +63,9 @@ public class JVMGC implements JVMGCMBean {
         List<GarbageCollectorMXBean> gcMXBeans = ManagementFactory.getGarbageCollectorMXBeans();
         for (GarbageCollectorMXBean gcMXBean : gcMXBeans) {
             String name = gcMXBean.getName();
-            if (JVMGC.fullGCMXBeanNameMap.containsKey(name)) {
+            if (fullGCMXBeanNameMap.containsKey(name)) {
                 this.fullGCMXBean = gcMXBean;
-            } else if (JVMGC.youngGCMXBeanNameMap.containsKey(name)) {
+            } else if (youngGCMXBeanNameMap.containsKey(name)) {
                 this.youngGCMXBean = gcMXBean;
             }
         }
@@ -80,7 +81,7 @@ public class JVMGC implements JVMGCMBean {
     }
 
 
-    @Override
+    
     public long getYoungGCCollectionCount() {
         if (this.youngGCMXBean == null) {
             return 0;
@@ -89,7 +90,7 @@ public class JVMGC implements JVMGCMBean {
         }
     }
 
-    @Override
+    
     public long getYoungGCCollectionTime() {
         if (this.youngGCMXBean == null) {
             return 0;
@@ -98,7 +99,7 @@ public class JVMGC implements JVMGCMBean {
         }
     }
 
-    @Override
+    
     public long getFullGCCollectionCount() {
         if (this.fullGCMXBean == null) {
             return 0;
@@ -107,7 +108,7 @@ public class JVMGC implements JVMGCMBean {
         }
     }
 
-    @Override
+    
     public long getFullGCCollectionTime() {
         if (this.fullGCMXBean == null) {
             return 0;
@@ -116,7 +117,7 @@ public class JVMGC implements JVMGCMBean {
         }
     }
 
-    @Override
+    
     public long getSpanYoungGCCollectionCount() {
         long current = this.getYoungGCCollectionCount();
         long result = current - this.lastYoungGCCollectionCount;
@@ -124,7 +125,7 @@ public class JVMGC implements JVMGCMBean {
         return result;
     }
 
-    @Override
+    
     public long getSpanYoungGCCollectionTime() {
         long current = this.getYoungGCCollectionTime();
         long result = current - this.lastYoungGCCollectionTime;
@@ -132,7 +133,7 @@ public class JVMGC implements JVMGCMBean {
         return result;
     }
 
-    @Override
+    
     public long getSpanFullGCCollectionCount() {
         long current = this.getFullGCCollectionCount();
         long result = current - this.lastFullGCCollectionCount;
@@ -140,7 +141,7 @@ public class JVMGC implements JVMGCMBean {
         return result;
     }
 
-    @Override
+    
     public long getSpanFullGCCollectionTime() {
         long current = this.getFullGCCollectionTime();
         long result = current - this.lastFullGCCollectionTime;
@@ -148,7 +149,7 @@ public class JVMGC implements JVMGCMBean {
         return result;
     }
 
-    @Override
+    
     public BigDecimal getFullGCCollectionTimeRate() {
         long gcTime = this.getFullGCCollectionTime() + this.getYoungGCCollectionTime();
         long upTime = this.runtimeMXBean.getUptime();
@@ -172,5 +173,18 @@ public class JVMGC implements JVMGCMBean {
 
     private long getUpTime() {
         return this.runtimeMXBean.getUptime();
+    }
+
+    @Override
+    public String toString() {
+        return "JVMGC{" +
+                "\nfullGCMXBean=" + fullGCMXBean +
+                "\n, youngGCMXBean=" + youngGCMXBean +
+                "\n, runtimeMXBean=" + runtimeMXBean +
+                "\n, lastYoungGCCollectionCount=" + this.getYoungGCCollectionCount() +
+                "\n, lastYoungGCCollectionTime=" + this.getYoungGCCollectionTime() +
+                "\n, lastFullGCCollectionCount=" + this.getFullGCCollectionCount() +
+                "\n, lastFullGCCollectionTime=" + this.getFullGCCollectionTime() +
+                "\n}";
     }
 }
