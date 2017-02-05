@@ -65,7 +65,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
     private static int randomHashSeed(ConcurrentHashMap instance) {
         if (sun.misc.VM.isBooted() && Holder.ALTERNATIVE_HASHING) {
-            return sun.misc.Hashing.randomHashSeed(instance);
+            return 0;//sun.misc.Hashing.randomHashSeed(instance);
         }
 
         return 0;
@@ -131,7 +131,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
         int h = hashSeed;
 
         if ((0 != h) && (k instanceof String)) {
-            return sun.misc.Hashing.stringHash32((String) k);
+            return 0;// sun.misc.Hashing.stringHash32((String) k);
         }
 
         h ^= k.hashCode();

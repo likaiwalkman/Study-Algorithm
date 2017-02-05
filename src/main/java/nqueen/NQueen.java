@@ -1,8 +1,5 @@
 package nqueen;
 
-/**
- * Created by kai_li on 2016/1/25.
- */
 public class NQueen {
     static int NQUEEN = 8;
     final static int SIZE = NQUEEN;
