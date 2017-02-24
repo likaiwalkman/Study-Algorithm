@@ -26,14 +26,23 @@ public class EchoServer {
                             boolean     f   = true;
                             while (f && (i = ins.read()) != -1) {
                                 System.out.print((char) i);
-                                if (i == 'o') {
-                                    f = false;
-                                }
+                                f = false;
                             }
                             Thread.sleep(5);
-                            socket.getOutputStream().write("Hi".getBytes());
-                            socket.shutdownOutput();
+                            socket.getOutputStream().write("b".getBytes());
+                            socket.getOutputStream().flush();
+
+                            //1、invoke socket's close method to close tcp connection
+                            //socket.close();
+
+                            //2、invoke socket's shutdownOutput method to close tcp connection
+                            //socket.shutdownOutput();
+
+                            //3、invoking socket's shutdownInput method will NOT close tcp connection
+                            socket.shutdownInput();
+
                             //socket.getInputStream().close();
+                            Thread.sleep(5*60*1000);
 
 
                         } catch (IOException e) {
