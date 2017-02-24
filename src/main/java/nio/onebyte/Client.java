@@ -18,7 +18,7 @@ public class Client {
                 sc.configureBlocking(false);
                 sc.register(selector, SelectionKey.OP_CONNECT);
 
-                InetSocketAddress serverSocketAddress = new InetSocketAddress("localhost", 9090);
+                InetSocketAddress serverSocketAddress = new InetSocketAddress("180.149.132.47", 80);
                 sc.connect(serverSocketAddress);
             }
 
@@ -38,7 +38,7 @@ public class Client {
                     iterator.remove();
 
                     if (selectionKey.isConnectable()) {
-                        if (sc.finishConnect()) {
+                        if (true || sc.finishConnect()) {
                             if ((++sum) == 3) {
                                 //System.exit(0);
                             }
@@ -70,7 +70,7 @@ public class Client {
                 }
             }
         } catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }
