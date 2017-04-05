@@ -19,8 +19,8 @@ public class FileSizeWSTM {
     private long updatePendingFileVisits(final int value) {
         return new Atomic<Long>() {
             public Long atomically() {
-                pendingFileVisits.swap(pendingFileVisits.get() + value);
-                return pendingFileVisits.get();
+                pendingFileVisits.swap(pendingFileVisits.getOrElse() + value);
+                return pendingFileVisits.getOrElse();
             }
         }.execute();
     }
@@ -30,7 +30,7 @@ public class FileSizeWSTM {
             if (!file.isDirectory()) {
                 new Atomic() {
                     public Object atomically() {
-                        totalSize.swap(totalSize.get() + file.length());
+                        totalSize.swap(totalSize.getOrElse() + file.length());
                         return null;
                     }
                 }.execute();
@@ -62,7 +62,7 @@ public class FileSizeWSTM {
         try {
             findTotalSizeOfFilesInDir(new File(fileName));
             latch.await(100, TimeUnit.SECONDS);
-            return totalSize.get();
+            return totalSize.getOrElse();
         } finally {
             service.shutdown();
         }
