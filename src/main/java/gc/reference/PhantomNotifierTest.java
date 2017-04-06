@@ -26,6 +26,7 @@ public class PhantomNotifierTest {
             } else if (count == 10){
                 break;
             }
+            count++;
         }
     }
 }
