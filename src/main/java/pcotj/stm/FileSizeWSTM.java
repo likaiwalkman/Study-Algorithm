@@ -1,3 +1,4 @@
+/*
 package pcotj.stm;
 
 import akka.stm.Atomic;
@@ -77,3 +78,4 @@ public class FileSizeWSTM {
         System.out.println("Time taken: " + (end - start) / 1.0e9);
     }
 }
+*/
