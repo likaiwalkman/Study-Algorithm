@@ -1,4 +1,10 @@
-public class VisitorPrinter implements Visitor{
+package designPattern;
+
+import designPattern.NodeA;
+import designPattern.NodeB;
+import designPattern.Visitor;
+
+public class VisitorPrinter implements Visitor {
 
     @Override
     public void visit(NodeA node) {

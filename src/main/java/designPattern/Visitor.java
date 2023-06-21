@@ -1,3 +1,5 @@
+package designPattern;
+
 public interface Visitor {
 
     void visit(NodeA node);

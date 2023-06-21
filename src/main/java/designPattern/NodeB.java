@@ -1,3 +1,5 @@
+package designPattern;
+
 public class NodeB implements Node {
 
     @Override
