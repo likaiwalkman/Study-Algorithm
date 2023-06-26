@@ -31,6 +31,6 @@ public class SolutionTest {
             ints[i] = (int)array[i];
         }
         int i = new Solution().maxProfit(ints);
-        Assert.assertEquals(0, i);
+        Assert.assertEquals(999, i);
     }
 }

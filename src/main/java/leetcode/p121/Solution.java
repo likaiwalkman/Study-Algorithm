@@ -2,25 +2,21 @@ package leetcode.p121;
 
 public class Solution {
     public int maxProfit(int[] prices) {
-        int[] ints = new int[prices.length-1];
 
-        for (int i = 0; i < prices.length - 1; i++) {
-            ints[i] = prices[i+1] - prices[i];
-        }
-        int maxDiff = 0;
-        int sum = 0;
-        for (int i = 0; i < ints.length; i++) {
-            if (ints[i] >= 0) {
-                sum += ints[i];
-            }else {
-                if (sum > maxDiff) {
-                    maxDiff = sum;
+        int maxProfit = 0;
+        int minVal = Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] > minVal) {
+                int mayMaxProfit = prices[i] - minVal;
+                if (mayMaxProfit > maxProfit) {
+                    maxProfit = mayMaxProfit;
                 }
-                sum = 0;
+            }
+            if (prices[i] < minVal) {
+                minVal = prices[i];
             }
         }
+        return maxProfit;
 
-
-        return maxDiff;
     }
 }
