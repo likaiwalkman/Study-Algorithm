@@ -4,4 +4,6 @@
 /target
 /out
 Study-Algorithm.iml
-/.idea
+/.idea!/src/main/java/download/
+/src/main/resources/index.m3u8
+/.idea/
