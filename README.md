@@ -47,5 +47,7 @@ stack：二叉树的非递归（迭代）实现
                                                &side=provider
                                                &timestamp=1498109581086
                                                &version=LATEST
-             
 
+find idea licence server:
+https://search.censys.io/search
+keyword: services.http.response.headers.location: account.jetbrains.com/fls-auth
