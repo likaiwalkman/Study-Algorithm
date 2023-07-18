@@ -16,15 +16,15 @@ public class Interruptable {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        InputStream ins = new FileInputStream(new File("/Users/victor/Desktop/hanatour-crawler2.rar"));
-
-        OutputStream ous = new FileOutputStream(new File("/Users/victor/Desktop/hanatour-crawler.rar"));
-
-        int bit;
-
-        while ((bit = ins.read()) != -1){
-            ous.write((-(byte)(bit)));
-        }
+//        InputStream ins = new FileInputStream(new File("/Users/victor/Desktop/hanatour-crawler2.rar"));
+//
+//        OutputStream ous = new FileOutputStream(new File("/Users/victor/Desktop/hanatour-crawler.rar"));
+//
+//        int bit;
+//
+//        while ((bit = ins.read()) != -1){
+//            ous.write((-(byte)(bit)));
+//        }
 
         final ReentrantLock l1 = new ReentrantLock();
         final ReentrantLock l2 = new ReentrantLock();
