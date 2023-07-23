@@ -25,13 +25,17 @@ public class TestCase {
 
     @Test
     public void test03() throws Exception{
-        Class<?> isolatedStaticHolder = new CustomizedClassloader().findClass("clsloader.StaticHolder");
+        CustomizedClassloader customizedClassloader = new CustomizedClassloader();
+        Class<?> isolatedStaticHolder = customizedClassloader.findClass("clsloader.StaticHolder");
         Field vField = isolatedStaticHolder.getDeclaredField("step");
         vField.set(isolatedStaticHolder, 2);
 
         Method increment = isolatedStaticHolder.getDeclaredMethod("increment", new Class[]{ int.class });
         Integer isolatedStaticHolderIncrementResult = (Integer) increment.invoke(null, 1);
 
-        Assert.assertEquals(3, isolatedStaticHolderIncrementResult.intValue());
+        Assert.assertEquals(5, isolatedStaticHolderIncrementResult.intValue());
+
+        int res = StaticHolder.increment(1);
+        Assert.assertEquals(3, res);
     }
 }

@@ -8,6 +8,8 @@ import java.util.*;
 
 @SuppressWarnings("ALL")
 public class CustomizedClassloader extends ClassLoader{
+
+    static boolean ALL_VIA_CURRENT_LOADER = false;
     public CustomizedClassloader(){
         super();
     }
@@ -32,9 +34,11 @@ public class CustomizedClassloader extends ClassLoader{
 
         Class<?> clz = null;
         if (name.startsWith("clsloader.")) {
-            clz = super.loadClass(name);
+            clz = findClass(name);
         }else {
-            clz = ClassLoader.getSystemClassLoader().loadClass(name);
+            ClassLoader parentClassLoader = getParent();
+            clz = parentClassLoader.loadClass(name);
+            //super.loadClass(name)
         }
 
         ClassLoader classLoader = clz.getClass().getClassLoader();
@@ -46,11 +50,12 @@ public class CustomizedClassloader extends ClassLoader{
         System.out.println("loadClass_2_params: "+" name:"+name +" resolve:"+resolve);
         Class<?> clz = null;
         if (name.startsWith("clsloader.")) {
-            clz = super.loadClass(name, resolve);
+            clz = findClass(name);
         }else {
-            clz = ClassLoader.getSystemClassLoader().loadClass(name);
+            ClassLoader parentClassLoader = getParent();
+            clz = parentClassLoader.loadClass(name);
         }
-        ClassLoader classLoader = clz.getClassLoader();
+        //ClassLoader classLoader = clz.getClassLoader();
         return clz;
     }
 
@@ -158,6 +163,4 @@ public class CustomizedClassloader extends ClassLoader{
             Thread.sleep(5000);
         }
     }
-
-
 }
