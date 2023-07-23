@@ -152,8 +152,9 @@ public class CustomizedClassloader extends ClassLoader{
             System.err.println("customizedClassloader: "+customizedClassloader);
             Class<?> stringUtilsClz = customizedClassloader.findClass("org.apache.commons.lang.StringUtils");
             Class<?> staticHolderClz = customizedClassloader.findClass("clsloader.StaticHolder");
+            //Class<?> staticHolderClz2 = new CustomizedClassloader().findClass("clsloader.StaticHolder");
 
-            new ClassInfoHelper().collectAllClassloaderClassSet();
+            new PrintClassInfoUtils().collectAllClassloaderClassSet();
 
             customizedClassloaders.add(customizedClassloader);
             if (customizedClassloaders.size() > 10) {

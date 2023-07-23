@@ -2,7 +2,7 @@ package clsloader;
 
 import java.util.Vector;
 
-public class ClassInfoHelper {
+public class PrintClassInfoUtils {
     public void collectAllClassloaderClassSet() throws Exception{
         ClassLoader classLoader = getClass().getClassLoader();
         Object[] list = list(classLoader);
