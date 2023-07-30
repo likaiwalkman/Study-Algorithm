@@ -4,13 +4,12 @@ import com.google.common.util.concurrent.RateLimiter;
 
 import java.util.concurrent.TimeUnit;
 
-public class RateLimiterTest {
+public class SmoothRateLimiterTest {
     public static void main(String[] args) throws Exception {
         RateLimiter rateLimiter = RateLimiter.create(100.0D);
         int num = 100;
 
-
-        for (int k = 0; k < 10; k++) {
+        for (int k = 1; k <= 10; k++) {
             int sleepTime = k;
             int count = 0;
             for (int i = 0; i < num; i++) {
@@ -30,7 +29,6 @@ public class RateLimiterTest {
             boolean b = rateLimiter.tryAcquire();
             TimeUnit.MILLISECONDS.sleep(0);
             if(!b){
-                //System.out.println("not success");
                 count++;
             }
         }
