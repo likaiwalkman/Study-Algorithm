@@ -43,8 +43,9 @@ public class Solution {
             for (int j = 0; j < n; j++) {
                 start[0] = i;
                 start[1] = j;
-
-                int res = iter(board, visitedSet, visitedList, 0, m, n, word, start);
+                int res = iter(board, visitedSet, visitedList, m, n, word, start);
+                visitedSet.clear();
+                visitedList.clear();
                 if (res == 1){
                     return true;
                 }
@@ -53,8 +54,8 @@ public class Solution {
         return false;
     }
 
-    private int iter(char[][] board, Set<Ints> visitedSet, List<int[]> visitedList, int count, int m, int n, String word, int[] start){
-        if (count == word.length()){
+    private int iter(char[][] board, Set<Ints> visitedSet, List<int[]> visitedList, int m, int n, String word, int[] start){
+        if (visitedList.size() == word.length()){
             return 1;
         }
 
@@ -72,22 +73,17 @@ public class Solution {
             }
         }
         options = options.stream().filter(index -> word.charAt(visitedList.size()) == board[index[0]][index[1]]).collect(Collectors.toList());
-        System.out.println();
 
         for (int i = 0; i < options.size(); i++) {
             int[] option = options.get(i);
             visitedSet.add(new Ints(option));
             visitedList.add(option);
-            count++;
-            int res = iter(board, visitedSet, visitedList, count, m, n, word, start);
+            int res = iter(board, visitedSet, visitedList, m, n, word, start);
             if (res == 1){
                 return 1;
-            }else if(res == -1){
-                System.out.println();
             }else {
                 visitedSet.remove(new Ints(option));
                 visitedList.remove(visitedList.size()-1);
-                count--;
             }
         }
         return -1;
@@ -97,7 +93,7 @@ public class Solution {
         return set.stream().map(ints->"["+ints[0]+","+ints[1]+"]").collect(Collectors.toList()).toString();
     }
 
-    public static String watch(char[][] board, List<int[]> visitedList){
+    public static String watchTrace(char[][] board, List<int[]> visitedList){
         if (visitedList == null || visitedList.size() == 0) {
             return "";
         }
