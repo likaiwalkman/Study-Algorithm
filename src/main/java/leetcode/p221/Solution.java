@@ -29,32 +29,19 @@ public class Solution {
 
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                boolean valid = matrix[i-1][j-1] != '1';
-                System.out.println("i="+i+", j="+j+" valid="+valid);
-                if (valid) {
+                if (matrix[i-1][j-1] != '1') {
                     continue;
                 }
-                for (int z = 1; z < square; z++) {
-
-                    boolean flag = z+i<=m && z+j <=n;
-                    if (!flag){
+                int maxDiff0 = 1;
+                if (maxDiff != 0) {
+                    maxDiff0 = maxDiff+1;
+                }
+                for (int z = maxDiff0; z < square; z++) {
+                    boolean flag1= z+i<=m && z+j <=n;
+                    if (!flag1 || arr[z+i][z+j] - arr[z+i][j-1] - ( arr[i-1][z+j] - arr[i-1][j-1]) != (z+1)*(z+1)){
                         break;
                     }
-                    int i2 = z+i;
-                    int j2 = z+j;
-                    int p1 = arr[i2][j2];
-                    int p2 = arr[i2][j-1];
-                    int p3 = arr[i-1][j2];
-                    int p4 = arr[i-1][j-1];
-
-                    int d =  p1 - p2 - ( p3 - p4);
-                    flag = flag && d == (z+1)*(z+1);
-                    if (!flag){
-                        break;
-                    }
-                    if (z > maxDiff) {
-                        maxDiff = z;
-                    }
+                    maxDiff = z;
                 }
             }
         }

@@ -24,4 +24,10 @@ public class Test {
         int i = new Solution().maximalSquare(matrix);
         Assert.assertEquals(4, i);
     }
+    @org.junit.Test
+    public void test3(){
+        char[][] matrix = {{'0','0','0','1'},{'1','1','0','1'},{'1','1','1','1'},{'0','1','1','1'},{'0','1','1','1'}};
+        int i = new Solution().maximalSquare(matrix);
+        Assert.assertEquals(9, i);
+    }
 }
