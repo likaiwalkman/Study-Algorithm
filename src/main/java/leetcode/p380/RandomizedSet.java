@@ -41,4 +41,30 @@ public class RandomizedSet {
         int i = random.nextInt(array.size());
         return array.get(i);
     }
+
+    public static void main(String[] args) {
+
+        ArrayList<Integer> ints = new ArrayList<>();
+        ints.size();
+
+
+        Integer i = 2;
+        int j = 0;
+
+        ints.add(2);
+        ints.add(3);
+        ints.remove(i);
+        System.out.println(ints);
+
+        ints.clear();
+        ints.add(0);
+        ints.add(1);
+        ints.add(2);
+        ints.add(3);
+        ints.add(4);
+        ints.add(5);
+        ints.remove(2);
+        System.out.println(ints);
+
+    }
 }
