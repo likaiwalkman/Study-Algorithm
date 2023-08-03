@@ -1,32 +1,29 @@
 package leetcode.p134;
 
 public class Solution {
-    static boolean debug = false;
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int n = gas.length;
+        if (n == 1) {
+            return gas[0] >= cost[0] ? 0 : -1;
+        }
 
-        for (int x = 0; x < n; x++) {
+        int[] diffs = new int[n];
+        for (int i = 0; i < gas.length; i++) {
+            diffs[i] = gas[i] - cost[i];
+        }
+
+        for (int i = 0; i < n; ) {
             int remaining = 0;
-            int y = x;
-            if (debug) {
-                System.out.println("-----------");
-                System.out.println("detect index: "+x);
-            }
+            int j = i;
             int count = 0;
-            while (gas[y] + remaining >= cost[y]) {
-                if (n == 1) {
-                    return x;
+            while (diffs[j%n] + remaining>=0) {
+                remaining += (gas[j%n] - cost[j%n]);
+                if (j % n == i && ++count == 2){
+                    return i;
                 }
-
-                if (debug){
-                    System.out.println("index y="+y+"  reachable\t");
-                }
-                remaining += (gas[y] - cost[y]);
-                if (y == x && ++count == 2){
-                    return x;
-                }
-                y = (y+1) % n;
+                j++;
             }
+            i = j+1;
         }
         return -1;
     }
