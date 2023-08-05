@@ -9,7 +9,7 @@ class ListNode {
  }
 
 public class Solution {
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList2(ListNode head) {
         if(head==null){
             return null;
         } else {
@@ -22,5 +22,24 @@ public class Solution {
             }
             return node;
         }
+    }
+
+    public leetcode.common.ListNode reverse(leetcode.common.ListNode head){
+        if (head == null){
+            return null;
+        }
+
+        leetcode.common.ListNode newHead = null;
+
+        while (head != null){
+            leetcode.common.ListNode nextHead = head.next;
+
+            leetcode.common.ListNode oldHead = newHead;
+            head.next = oldHead;
+            newHead = head;
+
+            head = nextHead;
+        }
+        return newHead;
     }
 }
