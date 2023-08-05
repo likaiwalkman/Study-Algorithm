@@ -5,9 +5,37 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Solution {
-    static boolean printlog = true;
 
     public int candy(int[] ratings) {
+        if (ratings.length == 1) {
+            return 1;
+        }
+        int length = ratings.length;
+        int[] candies = new int[length];
+        for (int i = 0; i < candies.length; i++) {
+            candies[i] = 1;
+        }
+        for (int i = 1; i < length; i++) {
+            if (ratings[i] > ratings[i-1] && candies[i] <= candies[i-1]) {
+                candies[i] = candies[i-1]+1;
+            }
+        }
+
+        for (int i = length-2; i >=0 ; i--) {
+            if (ratings[i] > ratings[i+1] && candies[i] <= candies[i+1]) {
+                candies[i] = candies[i+1]+1;
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i < candies.length; i++) {
+            sum += candies[i];
+        }
+        return sum;
+    }
+
+    static boolean printlog = true;
+
+    public int candy2(int[] ratings) {
         if (ratings.length == 1) {
             return 1;
         }
@@ -179,7 +207,6 @@ public class Solution {
         System.out.println("i="+i+",j="+j+" range:"+range+", mode="+mode);
     }
 
-
     static void inspectAccumulated(int ratings[], int[] current, int[] prev, int accumulated){
         if (!printlog) {
             return;
@@ -193,6 +220,7 @@ public class Solution {
         System.out.println("i="+i+",j="+j+" PrevRange:"+prevRange);
         System.out.println("accumulated: "+accumulated);
     }
+
     static String getRange(int ratings[], int[] ints){
         if (ints == null) {
             return "";
