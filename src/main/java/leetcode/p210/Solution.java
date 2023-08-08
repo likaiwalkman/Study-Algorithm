@@ -1,30 +1,71 @@
 package leetcode.p210;
 
-
+import java.util.*;
 
 public class Solution {
-    public int rangeBitwiseAnd(int left, int right) {
-        int[] ints = new int[32];
-        int size = 32;
-        int count = 0;
-        while (size > 0){
-            int leftBit  = (left  >>> 31-count) % 2 != 0 ? 1 : 0;
-            int rightBit = (right >>> 31-count) % 2 != 0 ? 1 : 0;
-            if ( leftBit == rightBit ) {
-                ints[count] = leftBit;
-                count++;
-                size--;
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        if (prerequisites == null || prerequisites.length == 0){
+            int[] ints = new int[numCourses];
+            for (int i = 0; i < numCourses; i++) {
+                ints[i] = i;
+            }
+            return ints;
+        }
+        Map<Integer,Integer> entryCountMap = new HashMap<>();
+        List<int[]> edges = new ArrayList<>();
+        LinkedHashSet<Integer> courses = new LinkedHashSet<>();
+        for (int[] prerequisite : prerequisites) {
+            int a = prerequisite[0];
+            if (entryCountMap.containsKey(a)) {
+                entryCountMap.put(a, entryCountMap.get(a)+1);
             }else {
-                break;
+                entryCountMap.put(a, 1);
+            }
+            edges.add(prerequisite);
+        }
+        boolean flag = true;
+        while (!edges.isEmpty() && flag) {
+            List<int[]> leftEdges = new ArrayList<>();
+            flag = false;
+            for (int[] edge : edges) {
+                int a = edge[0];
+                int b = edge[1];
+                if (!entryCountMap.containsKey(b)){
+                    flag = true;
+                    courses.add(b);
+                    if (entryCountMap.containsKey(a)) {
+                        Integer cnt = entryCountMap.get(a);
+                        if (cnt == 1) {
+                            courses.add(a);
+                            entryCountMap.remove(a);
+                        }else {
+                            entryCountMap.put(a, cnt-1);
+                        }
+                    }
+
+                }else {
+                    leftEdges.add(edge);
+                }
+            }
+            edges = leftEdges;
+        }
+        if (!edges.isEmpty()) {
+            return new int[]{};
+        }else {
+
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            if (!courses.contains(i)) {
+                courses.add(i);
             }
         }
 
-        int result = 0;
-        count = 0;
-        while (count < 32){
-            result <<= 1;
-            result += ints[count++];
+        int[] ints = new int[numCourses];
+        int count = 0;
+        for (Integer courseId : courses) {
+            ints[count++] = courseId;
         }
-        return result;
+        return ints;
     }
 }
