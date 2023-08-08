@@ -51,8 +51,6 @@ public class Solution {
         }
         if (!edges.isEmpty()) {
             return new int[]{};
-        }else {
-
         }
 
         for (int i = 0; i < numCourses; i++) {
