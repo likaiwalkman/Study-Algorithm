@@ -20,6 +20,39 @@ class WordDictionary {
 
     public WordDictionary() {}
 
+    public void deleteWord(String word, int startIndex, int endBorderIndex, TrieNode trieNode) {
+        if (startIndex == endBorderIndex){
+            return;
+        }
+
+        Character[] chars = new Character[endBorderIndex-startIndex+1];
+        for (int i = startIndex; i < endBorderIndex; i++) {
+            chars[i] = word.charAt(i);
+        }
+
+        boolean found = seqContains(chars, startIndex, trieNode);;
+        if (!found){
+            return;
+        }
+        TrieNode temp = root;
+        int index = startIndex;
+        seqContains(chars, index, trieNode);
+
+    }
+
+    public void deleteWord(String word) {
+        if (word == null || word.length() == 0){
+            return;
+        }
+
+        boolean found = search(word);
+        if (!found){
+            return;
+        }
+        TrieNode temp = root;
+
+    }
+
     public void addWord(String word) {
         TrieNode temp = root;
         char[] charArray = word.toCharArray();

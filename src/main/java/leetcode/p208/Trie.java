@@ -10,56 +10,60 @@ class Trie {
     public Trie() {}
 
     public void insert(String word) {
-        IntStream intStream = word.codePoints();
-        PrimitiveIterator.OfInt iterator = intStream.iterator();
-        TrieNode temp = root;
-        while (iterator.hasNext()) {
-            Integer element = iterator.next();
-            if (!temp.children.containsKey(element)) {
-                temp.children.put(element, new TrieNode(element));
-            }
-            temp = temp.children.get(element);
+        if (word == null || word.length() == 0) {
+            return;
         }
-        temp.children.put(null, TrieNode.NULL_OBJECT);
+
+        int index = 0;
+        TrieNode temp = root;
+        while (index < word.length()) {
+            char c = word.charAt(index);
+            TrieNode t = temp.children.get(c);
+            if (t == null) {
+                TrieNode newTrieNode = new TrieNode(c);
+                temp.children.put(c, newTrieNode);
+                temp = newTrieNode;
+            }else {
+                temp = t;
+            }
+            index++;
+        }
+        temp.children.put(null, null);
     }
 
     public boolean search(String word) {
-        IntStream intStream = word.codePoints();
-        PrimitiveIterator.OfInt iterator = intStream.iterator();
-        TrieNode temp = root;
-        while (iterator.hasNext()) {
-            Integer element = iterator.next();
-            boolean containsKey = temp.children.containsKey(element);
-            if (!containsKey) {
-                return false;
-            }
-            temp = temp.children.get(element);
-        }
-        return temp.children.containsKey(null);
+        TrieNode trieNode = startsWith0(word);
+        return trieNode != null && trieNode.children.containsKey(null);
     }
 
     public boolean startsWith(String prefix) {
-        IntStream intStream = prefix.codePoints();
-        PrimitiveIterator.OfInt iterator = intStream.iterator();
-        TrieNode temp = root;
-        while (iterator.hasNext()) {
-            Integer element = iterator.next();
-            boolean containsKey = temp.children.containsKey(element);
-            if (!containsKey) {
-                return false;
-            }
-            temp = temp.children.get(element);
-        }
-        return true;
+        TrieNode trieNode = startsWith0(prefix);
+        return trieNode != null;
     }
+
+    public TrieNode startsWith0(String prefix) {
+        if (prefix == null || prefix.length() == 0) {
+            return null;
+        }
+
+        int index = 0;
+        TrieNode temp = root;
+        while (temp != null && index < prefix.length()) {
+            char c = prefix.charAt(index);
+            temp = temp.children.get(c);
+            index++;
+        }
+        return temp;
+    }
+
 }
 
 class TrieNode {
     static final TrieNode NULL_OBJECT = new TrieNode(null);
-    public Integer val;
-    public Map<Integer, TrieNode> children = new HashMap<>();
+    public Character val;
+    public Map<Character, TrieNode> children = new HashMap<>();
 
-    public TrieNode(Integer val){
+    public TrieNode(Character val){
         this.val = val;
     }
 }
