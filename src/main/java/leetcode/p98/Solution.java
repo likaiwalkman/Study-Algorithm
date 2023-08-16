@@ -1,6 +1,7 @@
 package leetcode.p98;
 
 import leetcode.common.TreeNode;
+import sun.misc.Unsafe;
 
 import java.util.Stack;
 
