@@ -17,6 +17,59 @@ public class Solution {
             return true;
         }
 
+        if (s2Len == 0) {
+            for (int i = 0; i < s1.length(); i++) {
+                if (s1.charAt(i) != s3.charAt(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        if (s1 == null) {
+            s1 = "";
+        }
+        if (s2 == null) {
+            s2 = "";
+        }
+
+        boolean[] booleans = new boolean[s2.length() + 1];
+        booleans[0] = true;
+        for (int i = 1; i <= s2.length(); i++) {
+            int index = i-1;
+            if (booleans[index] && s2.charAt(index) == s3.charAt(index)) {
+                booleans[i] = true;
+            }
+        }
+        for (int i = 1; i <= s1Len; i++) {
+            for (int j = 0; j < booleans.length; j++) {
+                if (j > 0 && booleans[j-1] && s2.charAt(j-1) == s3.charAt(i+j-1)){
+                    booleans[j] = true;
+                    continue;
+                }
+                if (booleans[j] && s1.charAt(i-1) == s3.charAt(i+j-1)){
+                    booleans[j] = true;
+                    continue;
+                }
+                booleans[j] = false;
+            }
+        }
+        return booleans[s2Len];
+
+    }
+    public boolean isInterleave2(String s1, String s2, String s3) {
+        int s1Len = s1 == null ? 0 : s1.length();
+        int s2Len = s2 == null ? 0 : s2.length();
+        int s3Len = s3 == null ? 0 : s3.length();
+
+        if (s1Len + s2Len != s3Len){
+            return false;
+        }
+
+        if (s3Len == 0){
+            return true;
+        }
+
         if (s1 == null) {
             s1 = "";
         }
