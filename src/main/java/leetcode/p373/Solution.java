@@ -5,9 +5,9 @@ import java.util.*;
 public class Solution {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         PriorityQueue<int[]> minRootHeap = new PriorityQueue<>((o1, o2) -> {
-            if ( nums1[o1[0]] + nums2[o1[1]] < nums1[o2[0]] + nums2[o2[1]] ){
+            if ((nums1[o1[0]] + nums2[o1[1]]) < (nums1[o2[0]] + nums2[o2[1]])){
                 return -1;
-            }else if (nums1[o1[0]] + nums2[o1[1]] > nums1[o2[0]] + nums2[o2[1]]){
+            }else if ((nums1[o1[0]] + nums2[o1[1]]) > (nums1[o2[0]] + nums2[o2[1]])){
                 return 1;
             }else {
                 return 0;
