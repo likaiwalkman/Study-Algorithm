@@ -1,7 +1,6 @@
 package leetcode.p17_08;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class Solution {
     public int bestSeqAtIndex(int[] height, int[] weight) {
@@ -15,7 +14,8 @@ public class Solution {
             array[i][1] = weight[i];
         }
 
-        Arrays.sort(array, Comparator.comparingInt(o -> o[0]));
+        Arrays.sort(array, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
+
         int[] ints = new int[height.length];
         for (int i = 0; i < array.length; i++) {
             ints[i] = array[i][1];
@@ -31,7 +31,7 @@ public class Solution {
         for (int i = 1; i < nums.length; i++) {
             int temp = 1;
             for (int j = 0; j < i; j++) {
-                if (nums[i] >= nums[j]){
+                if (nums[i] > nums[j]){
                     if (dp[j]+1 > temp) {
                         temp = dp[j]+1;
                     }
@@ -46,10 +46,5 @@ public class Solution {
             }
         }
         return max;
-    }
-
-    public static int compare(int[] a, int[] b){
-        //if ()
-        return 0;
     }
 }
