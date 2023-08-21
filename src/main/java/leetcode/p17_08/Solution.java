@@ -24,7 +24,7 @@ public class Solution {
         return i;
     }
 
-    public static int lengthOfLIS(int[] nums) {
+    public int lengthOfLIS(int[] nums) {
         int[] dp = new int[nums.length];
         dp[0] = 1;
 
