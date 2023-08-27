@@ -1,35 +1,33 @@
 package leetcode.p295;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 class MedianFinder {
 
-    private boolean deleteBeforeAdd = true;
-    private Deque<Integer> deque = new LinkedList<>();
+    private PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2-o1);
+    private PriorityQueue<Integer> minHeap = new PriorityQueue<>((o1, o2) -> o1-o2);
 
     public MedianFinder() {}
 
     public void addNum(int num) {
-        if (deleteBeforeAdd) {
-            if (!deque.isEmpty()){
-                deque.pollFirst();
-            }
+        if (maxHeap.size() == 0 || num <= maxHeap.peek()) {
+            maxHeap.offer(num);
+        }else {
+            minHeap.offer(num);
         }
-        deque.offerLast(num);
-        deleteBeforeAdd = !deleteBeforeAdd;
+        if (minHeap.size() > maxHeap.size()){
+            maxHeap.offer(minHeap.poll());
+        }
+        if (maxHeap.size()-minHeap.size() > 1){
+            minHeap.offer(maxHeap.poll());
+        }
     }
 
     public double findMedian() {
-        if (deleteBeforeAdd) {
-            Integer first = deque.pollFirst();
-            Integer secondFirst = deque.pollFirst();
-            deque.offerFirst(secondFirst);
-            deque.offerFirst(first);
-            return (first + secondFirst) / 2.0;
-
+        if ((maxHeap.size() + minHeap.size()) % 2 == 1 ){
+            return maxHeap.peek();
         }else {
-            return deque.peekFirst();
+            return (minHeap.peek()+maxHeap.peek())/2.0;
         }
     }
 }

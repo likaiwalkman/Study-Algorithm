@@ -30,24 +30,22 @@ public class SolutionTest {
         Object[][] inputs = {
                 {6, 6.0},
                 {10, 8.0},
-                {2, 10.0},
+                {2, 6.0},
                 {6, 6.0},
-                {5, 2.0},
-                {0, 4.0},
+                {5, 6.0},
+                {0, 5.5},
                 {6, 6.0},
                 {3, 5.5},
                 {1, 5.0},
-                {0, 2.5},
-                {0, 0.0},
+                {0, 4.0},
+                {0, 3.0},
         };
         for (int i = 0; i < inputs.length; i++) {
             Object[] input = inputs[i];
             medianFinder.addNum((int)input[0]);
-            System.out.println(i);
-            if (i==10) {
-                System.out.println();
-            }
-            Assert.assertEquals((double)input[1],  medianFinder.findMedian(), 0.0);
+            double v = (double) input[1];
+            Assert.assertEquals(v,  medianFinder.findMedian(), 0.0);
+            System.out.println(input[0] +" " +i +" "+medianFinder.findMedian());
         }
     }
 }
