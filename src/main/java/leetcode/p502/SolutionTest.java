@@ -1,6 +1,12 @@
 package leetcode.p502;
 
+import leetcode.common.CallableTaskCostWatcher;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.Callable;
 
 public class SolutionTest {
     @org.junit.Test
@@ -26,4 +32,27 @@ public class SolutionTest {
         int maximizedCapital = new Solution().findMaximizedCapital(k, w, profits, capital);
         Assert.assertEquals(5, maximizedCapital);
     }
+
+    @org.junit.Test
+    public void test4(){
+        int k = 100000, w = 100000;
+        int[] profits = new int[k];
+        int[] capital = new int[k];
+
+        Random random = new Random();
+        for (int i = 0; i < k; i++) {
+            int x = random.nextInt(k);
+            capital[i] = x;
+            profits[i] = k;
+        }
+        Pair<Object, Long> pair = new CallableTaskCostWatcher<>(() -> {
+            //Arrays.sort(capital);
+            return null;
+        }).timeCost();
+        System.out.println(pair.getRight());
+        int maximizedCapital = new Solution().findMaximizedCapital(k, w, profits, capital);
+        System.out.println(maximizedCapital);
+        //Assert.assertEquals(5, maximizedCapital);
+    }
+
 }
