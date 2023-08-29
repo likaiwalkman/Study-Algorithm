@@ -20,7 +20,7 @@ public class Solution {
             }
         }
 
-        LinkedList<Character> redundants = new LinkedList<>();
+        Map<Character, Integer> redundants = new HashMap<>();
         LinkedList<Integer> substringIndices = new LinkedList<>();
         Integer minLen = Integer.MAX_VALUE;
 
@@ -47,14 +47,21 @@ public class Solution {
                 continue;
             }
             if (readableMap.containsKey(c)){
-                redundants.add(c);
+
+                if (!redundants.containsKey(c)) {
+                    redundants.put(c, 1);
+                }else {
+                    redundants.put(c, 1+redundants.get(c));
+                }
                 substringIndices.add(i);
-                while (!redundants.isEmpty() && redundants.contains(s.charAt(substringIndices.getFirst()))){
-                    //System.out.println();
+                while (!redundants.isEmpty() && redundants.containsKey(s.charAt(substringIndices.getFirst()))){
                     Character toDeleteRedundant = s.charAt(substringIndices.getFirst());
-                    redundants.remove(toDeleteRedundant);
+                    if (redundants.get(toDeleteRedundant) == 1) {
+                        redundants.remove(toDeleteRedundant);
+                    }else {
+                        redundants.put(toDeleteRedundant, redundants.get(toDeleteRedundant)-1);
+                    }
                     substringIndices.removeFirst();
-                    //System.out.println();
                 }
                 if (writableMap.isEmpty()){
                     int len = substringIndices.getLast() - substringIndices.getFirst() + 1;
