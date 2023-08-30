@@ -4,11 +4,8 @@ import java.util.*;
 
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> verticals = new HashSet<>();
         Map<String, Set<String>> edges = new HashMap<>();
-        for (String s : wordList) {
-            verticals.add(s);
-        }
+        Set<String> verticals = new HashSet<>(wordList);
         verticals.add(beginWord);
         if (!verticals.contains(endWord)){
             return 0;
@@ -37,10 +34,35 @@ public class Solution {
             }
         }
         Map<String, Integer> resultMap = new HashMap<>();
-
-        // edges.get(beginWord).contains(endWord)
-        //edges.containsKey(beginWord)
-        //TODO
-        return 0;//
+        resultMap.put(beginWord, 1);
+        List<String> seeds = new ArrayList<>();
+        seeds.add(beginWord);
+        while (!seeds.isEmpty()){
+            List<String> newSeeds = new ArrayList<>();
+            for (String seed : seeds) {
+                if (!verticals.contains(seed)) {
+                    continue;
+                }
+                if (!edges.containsKey(seed)) {
+                    continue;
+                }
+                verticals.remove(seed);
+                Set<String> dests = edges.get(seed);
+                for (String dest : dests) {
+                    if (!resultMap.containsKey(dest)) {
+                        resultMap.put(dest, resultMap.get(seed)+1);
+                    }else {
+                        Integer oldValue = resultMap.get(dest);
+                        if (resultMap.get(seed)+1 < oldValue) {
+                            resultMap.put(dest, resultMap.get(seed)+1);
+                        }
+                    }
+                }
+                newSeeds.addAll(dests);
+            }
+            newSeeds.removeIf(i->!verticals.contains(i));
+            seeds = newSeeds;
+        }
+        return resultMap.getOrDefault(endWord, 0);
     }
 }
