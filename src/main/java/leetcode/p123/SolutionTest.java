@@ -55,6 +55,6 @@ public class SolutionTest {
     @Test
     public void test9(){
         int i = new Solution().maxProfit(new int[]{6,5,4,8,6,8,7,8,9,4,5});
-        Assert.assertEquals(13, i);
+        Assert.assertEquals(7, i);
     }
 }

@@ -4,6 +4,40 @@ import java.util.*;
 
 public class Solution {
     public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int[][][] dp = new int[n][][];
+        for (int i = 0; i < n; i++) {
+            dp[i] = new int[3][];
+            for (int j = 0; j < 3; j++) {
+                dp[i][j] = new int[2];
+            }
+
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= 2; j++) {
+                for (int k = 0; k <= 1; k++) {
+                    if (i == 0) {
+                        if (k == 1){
+                            dp[i][j][k] = -prices[i];
+                        }else if (k==0){
+                            dp[i][j][k] = 0;
+                        }
+                        continue;
+                    }
+                    if (j==0){
+                        dp[i][j][0] = 0;
+
+                    }else {
+                        dp[i][j][0] = Math.max(dp[i-1][j-1][1]+prices[i], dp[i-1][j][0]);
+                    }
+                    dp[i][j][1] = Math.max(dp[i-1][j][0]-prices[i], dp[i-1][j][1]);
+                }
+            }
+        }
+        return dp[n-1][2][0];
+    }
+
+    public int maxProfit2(int[] prices) {
         if (prices.length == 1) {
             return 0;
         }
