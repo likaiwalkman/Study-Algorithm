@@ -13,10 +13,19 @@ public class Solution {
             }
         }
         List<List<String>> results = new ArrayList<>();
+        TrieNode temp = trie.root;
         for (int i = 1; i <= searchWord.length(); i++) {
+            char c = searchWord.charAt(i - 1);
+            if (temp != null) {
+                temp = temp.getChildren().get(c);
+            }
             String substring = searchWord.substring(0, i);
-            List<String> result = trie.top3PrefixMatchedList(substring);
-            results.add(result);
+            if (results.isEmpty() || results.get(results.size()-1).size() != 0) {
+                List<String> result = trie.topCountedPrefixMatchedList(temp, substring, 3);
+                results.add(result);
+            }else {
+                results.add(new ArrayList<>());
+            }
         }
         return results;
     }
@@ -39,24 +48,14 @@ public class Solution {
                 temp.getChildren().put(TrieNode.EMPTY_CHAR_REPRESENTATIVE, null);
             }
         }
-        public List<String> top3PrefixMatchedList(String prefix){
+        public List<String> topCountedPrefixMatchedList(TrieNode temp, String prefix, int count){
             List<String> result = new ArrayList<>();
-            TrieNode temp = root;
-            for (int i = 0; i < prefix.length(); i++) {
-                char c = prefix.charAt(i);
-                if (temp.getChildren().containsKey(c)) {
-                    temp = temp.getChildren().get(c);
-                }else {
-                    temp = null;
-                    break;
-                }
-            }
             if (temp == null) {
                 return result;
             }
 
             StringBuilder builder = new StringBuilder(prefix);
-            iter(temp, result, builder, 3);
+            iter(temp, result, builder, count);
             return result;
         }
 
