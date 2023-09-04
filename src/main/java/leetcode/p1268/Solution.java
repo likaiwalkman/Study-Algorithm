@@ -1,12 +1,10 @@
 package leetcode.p1268;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Solution {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
-        Trie trie = new Trie();
+        Trie trie = new Trie(3);
         if (products != null) {
             for (String product : products) {
                 trie.add(product);
@@ -19,21 +17,31 @@ public class Solution {
             if (temp != null) {
                 temp = temp.getChildren().get(c);
             }
-            String substring = searchWord.substring(0, i);
-            if (results.isEmpty() || results.get(results.size()-1).size() != 0) {
-                List<String> result = trie.topCountedPrefixMatchedList(temp, substring, 3);
-                results.add(result);
-            }else {
+            if (temp == null) {
                 results.add(new ArrayList<>());
+            }else {
+                LinkedList<String> result = new LinkedList<>();
+                while (!temp.sortedList.isEmpty()) {
+                    String poll = temp.sortedList.poll();
+                    result.addFirst(poll);
+                }
+                for (String s : result) {
+                    temp.sortedList.offer(s);
+                }
+                results.add(result);
             }
         }
         return results;
     }
 
     public static class Trie {
+        private int sortedListLimit;
+        public Trie(int kdequeLimit){
+            this.sortedListLimit = kdequeLimit;
+        }
         private TrieNode root = new TrieNode();
         public void add(String word){
-            if (word == null || word.length() == 0) {
+            if (word == null || word.isEmpty()) {
                 return;
             }
             TrieNode temp = root;
@@ -43,38 +51,18 @@ public class Solution {
                     temp.getChildren().put(c, new TrieNode(c));
                 }
                 temp = temp.getChildren().get(c);
+
+                if (temp.sortedList.size() < sortedListLimit) {
+                    temp.sortedList.offer(word);
+                }else {
+                    if (temp.sortedList.peek().compareTo(word) > 0) {
+                        temp.sortedList.poll();
+                        temp.sortedList.offer(word);
+                    }
+                }
             }
             if (!temp.getChildren().containsKey(TrieNode.EMPTY_CHAR_REPRESENTATIVE)) {
                 temp.getChildren().put(TrieNode.EMPTY_CHAR_REPRESENTATIVE, null);
-            }
-        }
-        public List<String> topCountedPrefixMatchedList(TrieNode temp, String prefix, int count){
-            List<String> result = new ArrayList<>();
-            if (temp == null) {
-                return result;
-            }
-
-            StringBuilder builder = new StringBuilder(prefix);
-            iter(temp, result, builder, count);
-            return result;
-        }
-
-        private void iter(TrieNode node, List<String> result, StringBuilder builder, int count){
-            TreeMap<Character, TrieNode> children = node.getChildren();
-            if (children.containsKey(TrieNode.EMPTY_CHAR_REPRESENTATIVE)) {
-                if (result.size() < count) {
-                    result.add(builder.toString());
-                }
-                if (result.size() == count) {
-                    return;
-                }
-            }
-            for (Character c : children.keySet()) {
-                if(c != TrieNode.EMPTY_CHAR_REPRESENTATIVE){
-                    builder.append(c);
-                    iter(children.get(c), result, builder, count);
-                    builder.deleteCharAt(builder.length()-1);
-                }
             }
         }
 
@@ -84,7 +72,8 @@ public class Solution {
         public static final char EMPTY_CHAR_REPRESENTATIVE = (char)0;
 
         private Character v;
-        private final TreeMap<Character, TrieNode> children = new TreeMap<>();
+        private final Map<Character, TrieNode> children = new HashMap<>();
+        public PriorityQueue<String> sortedList = new PriorityQueue<>(Comparator.reverseOrder());
 
         public TrieNode(Character v){
             this.v = v;
@@ -95,7 +84,7 @@ public class Solution {
             return v;
         }
 
-        public TreeMap<Character, TrieNode> getChildren() {
+        public Map<Character, TrieNode> getChildren() {
             return children;
         }
     }
