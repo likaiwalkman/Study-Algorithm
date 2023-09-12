@@ -10,20 +10,18 @@ public class Solution {
         }
 
         TreeNode originalRoot = root;
-
-        TreeNode targetParent = null;
         TreeNode target = null;
-
+        TreeNode targetParent = null;
         while (root != null) {
             if (root.val == key) {
                 target = root;
+                break;
+            }else if(key > root.val ) {
+                targetParent = root;
+                root = root.right;
             }else {
                 targetParent = root;
-                if (key < root.val) {
-                    root = root.left;
-                }else {
-                    root = root.right;
-                }
+                root = root.left;
             }
         }
 
@@ -31,83 +29,68 @@ public class Solution {
             return originalRoot;
         }
 
-        TreeNode targetRightMostLeft = null;
-        TreeNode targetRightMostLeftParent = target.right;
-        if (targetRightMostLeftParent != null && targetRightMostLeftParent.left != null){
-            targetRightMostLeft = targetRightMostLeftParent.left;
-            while (targetRightMostLeft != null) {
-                // targetRightMostLeftParent = targetRightMostLeftParent;
-                targetRightMostLeft = targetRightMostLeftParent.left;
-            }
-        }
-
-
-        if (targetParent == null) {
-            if (target.left == null && target.right == null) {
+        if (target.left == null && target.right == null) {
+            if (targetParent == null){
                 return null;
-            }else if (target.left == null && target.right != null) {
-                return originalRoot.right;
-            }else if (target.left != null && target.right == null) {
-                return originalRoot.left;
             }else {
-                if (targetRightMostLeft == null) {
-                    target.right.left = target.left;
-                    return target.right;
-                }else {
-                    targetRightMostLeftParent.left = null;
-                    targetRightMostLeftParent.right = target;
-                    targetRightMostLeft.left = target.left;
-                    return targetRightMostLeft;
-                }
-            }
-        }else {
-            if (target.left == null && target.right == null) {
                 if (targetParent.left == target) {
                     targetParent.left = null;
-                }else {
+                }
+                if (targetParent.right == target) {
                     targetParent.right = null;
                 }
                 return originalRoot;
-            }else if (target.left == null && target.right != null) {
-                if (targetParent.left == target) {
-                    targetParent.left = target.right;
-                }else {
-                    targetParent.right = target.right;
-                }
-                return originalRoot.right;
-            }else if (target.left != null && target.right == null) {
-                if (targetParent.left == target) {
-                    targetParent.left = target.left;
-                }else {
-                    targetParent.right = target.left;
-                }
-                return originalRoot.left;
+            }
+        }else if (target.left == null && target.right != null) {
+            TreeNode targetRight = target.right;
+            target.right = null;
+            if (targetParent == null){
+                return targetRight;
             }else {
-                if (targetRightMostLeft == null) {
-                    target.right.left = target.left;
-                    if (targetParent.left == target) {
-                        targetParent.left = target.right;
-                    }else {
-                        targetParent.right = target.right;
-                    }
-                    return originalRoot;
-                }else {
-                    targetRightMostLeftParent.left = null;
-                    targetRightMostLeftParent.right = target;
-                    targetRightMostLeft.left = target.left;
-
-                    if (targetParent.left == target) {
-                        targetParent.left = targetRightMostLeft;
-                    }else {
-                        targetParent.right = targetRightMostLeft;
-                    }
-                    return originalRoot;
+                if (targetParent.left == target) {
+                    targetParent.left = targetRight;
                 }
+                if (targetParent.right == target) {
+                    targetParent.right = targetRight;
+                }
+                return originalRoot;
+            }
+        }else if (target.left != null && target.right == null) {
+            TreeNode targetLeft = target.left;
+            target.left = null;
+            if (targetParent == null){
+                return targetLeft;
+            }else {
+                if (targetParent.left == target) {
+                    targetParent.left = targetLeft;
+                }
+                if (targetParent.right == target) {
+                    targetParent.right = targetLeft;
+                }
+                return originalRoot;
+            }
+        }else {
+            TreeNode targetLeft = target.left;
+            TreeNode targetRight = target.right;
+            target.left = null;
+
+            TreeNode targetRightMostLeft = targetRight;
+            while (targetRightMostLeft.left != null) {
+                targetRightMostLeft = targetRightMostLeft.left;
+            }
+            targetRightMostLeft.left = targetLeft;
+
+            if (targetParent == null){
+                return targetRight;
+            }else {
+                if (targetParent.left == target) {
+                    targetParent.left = targetRight;
+                }else {
+                    targetParent.right = targetRight;
+                }
+                return originalRoot;
             }
         }
-
-
-
 
 
     }
