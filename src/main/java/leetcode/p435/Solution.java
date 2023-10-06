@@ -1,19 +1,23 @@
 package leetcode.p435;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {
-        Arrays.sort(intervals, (o1, o2) -> o1[0] != o2[0] ? o1[0] - o2[0] : o1[1] - o2[1]);
-        int result = 0;
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1]));
+
+        int count = 0;
         int i = 0;
-        for (int j = 1; j < intervals.length; j++) {
-            if (intervals[j][0] < intervals[i][1]){
-                result++;
-            }else {
-                i = j;
+        while (i < intervals.length) {
+            count++;
+            int j = i+1;
+            while (j < intervals.length && intervals[j][0] < intervals[i][1]) {
+                j++;
             }
+            i = j;
         }
-        return result;
+
+        return intervals.length - count;
     }
 }
