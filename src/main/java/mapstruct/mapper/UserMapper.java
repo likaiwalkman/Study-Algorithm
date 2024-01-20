@@ -6,9 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface UserMapper {
-    UserMapper INSTANCES = Mappers.getMapper(UserMapper.class);
+public abstract class UserMapper {
+    public static UserMapper INSTANCES = Mappers.getMapper(UserMapper.class);
 
     //@Mappings(@Mapping(source = "name", target = "name"))
-    UserDto toUserRoleDto(User user);
+    public abstract UserDto toUserRoleDto(User user);
 }
