@@ -13,7 +13,6 @@ class Solution {
         ListNode prevGroupTail = null;
         ListNode nextGroupHead = null;
 
-
         while (head != null ){
             ListNode groupHead = head;
             ListNode groupTail = null;
@@ -27,26 +26,24 @@ class Solution {
 
             if (count % 2 == 0){
                 ListNode oldGroupHead = groupHead;
-                while (groupHead.next != groupTail) {
-                    ListNode next = groupHead.next;
-                    next.next = groupHead;
-                    groupHead = next;
+                ListNode groupHeadNext = groupHead.next;
+                ListNode groupHeadNextNext = groupHeadNext == null ? null : groupHeadNext.next;
+                while (groupHead != groupTail) {
+                    groupHeadNext.next = groupHead;
+
+                    groupHead = groupHeadNext;
+                    groupHeadNext = groupHeadNextNext;
+                    groupHeadNextNext = groupHeadNext == null ? null:groupHeadNext.next;
                 }
-                groupTail.next = groupHead;
-
                 oldGroupHead.next = nextGroupHead;
-
-                groupTail.next=groupHead;
                 if (prevGroupTail != null){
-                    prevGroupTail.next = groupTail;
+                    prevGroupTail.next = groupHead;
                 }
 
                 prevGroupTail = oldGroupHead;
             }else {
                 prevGroupTail = groupTail;
             }
-
-
             groupLen++;
         }
 

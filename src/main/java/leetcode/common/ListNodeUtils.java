@@ -13,4 +13,16 @@ public class ListNodeUtils {
         }
         return root;
     }
+    public static String convertNonCyclicListNodeToString(ListNode listNode){
+        StringBuilder builder = new StringBuilder();
+        while (listNode != null){
+            if (listNode.next != null) {
+                builder.append(listNode.val).append("->");
+            }else {
+                builder.append(listNode.val);
+            }
+            listNode = listNode.next;
+        }
+        return builder.toString();
+    }
 }
